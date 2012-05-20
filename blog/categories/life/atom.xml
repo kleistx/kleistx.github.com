@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: life | Xway]]></title>
+  <link href="http://kleistx.github.com/blog/categories/life/atom.xml" rel="self"/>
+  <link href="http://kleistx.github.com/"/>
+  <updated>2012-05-21T00:06:22+08:00</updated>
+  <id>http://kleistx.github.com/</id>
+  <author>
+    <name><![CDATA[xway]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[旧日读书时光]]></title>
+    <link href="http://kleistx.github.com/blog/jiu-ri-du-shu-shi-guang/"/>
+    <updated>2012-05-11T00:01:00+08:00</updated>
+    <id>http://kleistx.github.com/blog/jiu-ri-du-shu-shi-guang</id>
+    <content type="html"><![CDATA[<p>最怀恋小时候的那些闲暇时光，世界充满了不可知，了解外界的窗口仅仅就是电视机，没有身处于时代洪流中的匆忙，得以慢慢的学习，那是何等的惬意啊，为了一点小知而洋洋得意，抓住什么书就了解什么，不管他是翻译晦涩的，还是文笔粗陋的，还是不明逻辑的，统统并收。那时看了很多其实很有意思，但今天决不会再花时间的书。<br/>
+今天的时间总是不够用，似乎要把时间留给最重要的学问，最有用的技术，渐渐的反而看书的范围越来越窄，无法突破了。</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: tools | Xway]]></title>
+  <link href="http://kleistx.github.com/blog/categories/tools/atom.xml" rel="self"/>
+  <link href="http://kleistx.github.com/"/>
+  <updated>2012-05-21T00:06:22+08:00</updated>
+  <id>http://kleistx.github.com/</id>
+  <author>
+    <name><![CDATA[xway]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress折腾记]]></title>
+    <link href="http://kleistx.github.com/blog/octopresszhe-teng-ji/"/>
+    <updated>2012-05-13T17:36:00+08:00</updated>
+    <id>http://kleistx.github.com/blog/octopresszhe-teng-ji</id>
+    <content type="html"><![CDATA[<p>年初，发现很多技术博客（特别是喜好ruby的）都换了新面孔，简洁大气，开始还以为是wordpress的new theme，后来发现不是，他们用了Ocotopress，其中贴代码的部分十分漂亮，让我心动不已，自己本来有个wordpress的博客在SAE上，但老要买云豆很不爽，于是也摆弄摆弄Octopress，顺便把尘封已久的github账号拿出来抖抖灰，抽空折腾了两天，小记一下，我是将其部署至github，本地系统为mac，整个过程参考了<a href="http://octopress.org/docs/deploying/">此处</a>。</p>
+
+<h3>了解</h3>
+
+<ul>
+<li><a href="http://blog.xdite.net/posts/2011/10/07/what-is-octopress/">Why Octopress?</a></li>
+<li><a href="http://wowubuntu.com/markdown/#autoescape">Markdown语法</a></li>
+</ul>
+
+
+<h3>环境</h3>
+
+<p>如果你已经安装了最新的git和ruby，请忽略。</p>
+
+<ul>
+<li><a href="http://ihower.tw/rails3/installation.html">安装最新的ruby</a></li>
+<li><a href="http://book.51cto.com/art/201107/278761.htm">使用homebrew在mac下安装git </a></li>
+</ul>
+
+
+<h3>github</h3>
+
+<ul>
+<li>注册github账号，这个很简单，不多说。</li>
+<li><a href="http://help.github.com/create-a-repo/">创建一个repository</a>，如果你的账号形如 username，你创建的这个repository名称应为username.github.com，切记。</li>
+<li><a href="http://help.github.com/mac-set-up-git/">设置你在github上的ssh key</a></li>
+</ul>
+
+
+<h3>安装Octopress</h3>
+
+<h4>下载Octopress</h4>
+
+<pre><code>git clone git://github.com/imathis/octopress.git octopress
+cd octopress # 如果使用 RVM, 这里将会询问是否信任该 .rvmrc (选yes).
+ruby --version # 应该大于 Ruby 1.9.2
+</code></pre>
+
+<p> .rvmrc文件中默认的ruby版本是1.9.2，假如你的ruby版本高于1.9.2，修改它。</p>
+
+<h4>安装相应的gem</h4>
+
+<pre><code>bundle update
+</code></pre>
+
+<h4>生成模板文件</h4>
+
+<pre><code>rake install
+</code></pre>
+
+<h3>部署至github</h3>
+
+<h4>连接至github</h4>
+
+<pre><code>rake setup_github_pages
+</code></pre>
+
+<p>  输入url地址，形如</p>
+
+<pre><code>git@github.com:username/username.github.com.git
+</code></pre>
+
+<h4>生成静态页面</h4>
+
+<pre><code>rake generate
+</code></pre>
+
+<h4>本地预览</h4>
+
+<pre><code>rake preview 
+</code></pre>
+
+<p>访问http://localhost:4000 查看本地效果，用ctrl+c可结束  。</p>
+
+<h4>部署</h4>
+
+<pre><code>rake deploy
+</code></pre>
+
+<p>访问 http://username.github.com 查看博客服务器效果  。</p>
+
+<h3>配置博客信息</h3>
+
+<p>修改Octopress/_config.yml，参考http://octopress.org/docs/configuring/ ，示例如下，若包含中文，请将文件格式保存成utf-8的格式。</p>
+
+<pre><code>url: http://kleistx.github.com/
+title: Xway
+subtitle: 
+author: xway
+simple_search: http://google.com/search
+description:
+</code></pre>
+
+<h3>创建新文章和新页面</h3>
+
+<pre><code>rake new_post["article name"]
+rake new_page["page name"]
+</code></pre>
+
+<p>文章创建后，可在source/_post文件夹下找到，推荐使用<a href="http://mouapp.com/">Mou</a>编辑，更新之后需要重新生成静态页面，并重新部署。</p>
+
+<pre><code>rake generate
+rake deploy
+</code></pre>
+
+<h3>使用Disqus评论系统</h3>
+
+<p>注册一个Disqus账号，记住shortname，然后打开”_config.yml”，找到disqus相关的配置项，修改即可：</p>
+
+<pre><code>#Disqus Comments
+disqus_short_name: xway
+disqus_show_comment_count: true
+</code></pre>
+
+<p>记住冒号后面是有空格的。</p>
+
+<h3>贴代码</h3>
+
+<p>Octopress使用了pygments，所以支持多种编程语言的代码，具体方法见<a href="http://octopress.org/docs/plugins/codeblock/">此处</a>，我常用的方式是：</p>
+
+<pre><code>｛% codeblock %｝
+  Awesome code snippet
+｛% endcodeblock  %｝
+</code></pre>
+
+<p>效果如下：</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Awesome code snippet</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>或者</p>
+
+<pre><code>｛% codeblock Time to be Awesome - awesome.rb %｝
+  puts "Awesome!" unless lame
+｛% endcodeblock %｝
+</code></pre>
+
+<p>效果如下：</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Time to be Awesome - awesome.rb </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Awesome!&quot;</span> <span class="k">unless</span> <span class="n">lame</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac常用第三方软件推荐]]></title>
+    <link href="http://kleistx.github.com/blog/macchang-yong-di-san-fang-ruan-jian-tui-jian/"/>
+    <updated>2012-05-12T23:45:00+08:00</updated>
+    <id>http://kleistx.github.com/blog/macchang-yong-di-san-fang-ruan-jian-tui-jian</id>
+    <content type="html"><![CDATA[<h3>编程工具</h3>
+
+<p>xcode：mac下编译软件必备。<br/>
+python：我最喜欢的编程利器。<br/>
+easy_install：方便安装python包。 <br/>
+ruby：和python一样是语言中的战斗机。  <br/>
+homebrew：依赖ruby，方便安装卸载很多编程工具。  <br/>
+iterm2：增强终端。<br/>
+github for mac：github官方出品的git客户端。  <br/>
+color Exploer：取色器。 <br/>
+go2shell：在finder中打开终端并转入当前目录。  <br/>
+snippets：代码片段收集工具。<br/>
+navicat for mysql lite：老牌数据库管理工具。</p>
+
+<h3>浏览器</h3>
+
+<p>chrome：有诸多插件。</p>
+
+<h3>中文输入法</h3>
+
+<p>搜狗拼音：相比fit和QQ输入法，这个更适合我。</p>
+
+<h3>编辑器</h3>
+
+<p>textmate：神器一枚，由于dhh的推荐，路人皆知。  <br/>
+chocolat：另一个textmate，不过现在还是测试版。<br/>
+coderunner：编程利器，功能比textmate稍逊，轻便且使用简单。<br/>
+cssedit：编辑css专用。<br/>
+mou：使用makedown语法，写文章专用。</p>
+
+<h3>办公套件</h3>
+
+<p>iwork09：包括keynote、pages、和numbers。    <br/>
+office 2011：微软的办公套件。</p>
+
+<h3>效率工具</h3>
+
+<p>evernote：免费版已够用，记录笔记，支持云同步。<br/>
+everbox：类似dropbox，盛大云存储客户端。
+google drive：google的云端硬盘。
+mind note：思维导图工具。<br/>
+alfred：快速启动工具，类似windows下launchy。</p>
+
+<h3>阅读器</h3>
+
+<p>chmox：阅读chm格式文件。<br/>
+reeder：google reader客户端。    <br/>
+cappuccino：另一个reeder，目前测试中。<br/>
+readlater：收集文章，待有空时慢慢看。 <br/>
+ocrkit：转换扫描版pdf成文字版。</p>
+
+<h3>多媒体</h3>
+
+<p>mplayerx：开源媒体播放器，通杀所有格式。<br/>
+pptv网络电视：在线看电影。
+vox：音频播放器，短小精悍。<br/>
+diumoo：豆瓣电台客户端。<br/>
+guitar pro：吉他六线谱编辑和播放软件，学吉他必备。    <br/>
+screenflow：录屏软件。</p>
+
+<h3>图形图像</h3>
+
+<p>skitch：简单图片处理，和evernote出自同一公司。  <br/>
+xee：看图软件。</p>
+
+<h3>虚拟机</h3>
+
+<p>vmware fusion：和windows下的vmware一样出名。</p>
+
+<h3>上传下载工具</h3>
+
+<p>迅雷：比windows下的迅雷简洁的多，支持bt和电驴。  <br/>
+sitesucker：下载整个网站。</p>
+
+<h3>系统工具</h3>
+
+<p>1password：密码管理必备。  <br/>
+cleanmymac：系统清理软件。 <br/>
+ccleaner：系统垃圾清理。<br/>
+appfresh：系统软件更新。<br/>
+day-o：替换系统时间工具。 <br/>
+memoryfree 2 :内存释放工具。<br/>
+simonfree：网络工具。</p>
+
+<h3>即时通讯</h3>
+
+<p>qq：无法逃避的腾讯客户端。<br/>
+ipmessenger：mac下的飞鸽传书。<br/>
+macbo：新浪微博客户端。</p>
+
+<h3>其他</h3>
+
+<p>google earth：研究世界。</p>
+]]></content>
+  </entry>
+  
+</feed>
