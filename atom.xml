@@ -4,7 +4,7 @@
   <title><![CDATA[Xway]]></title>
   <link href="http://kleistx.github.com/atom.xml" rel="self"/>
   <link href="http://kleistx.github.com/"/>
-  <updated>2012-05-21T00:06:22+08:00</updated>
+  <updated>2012-05-28T00:37:20+08:00</updated>
   <id>http://kleistx.github.com/</id>
   <author>
     <name><![CDATA[xway]]></name>
@@ -99,6 +99,10 @@ ruby --version # 应该大于 Ruby 1.9.2
 
 <p>访问 http://username.github.com 查看博客服务器效果  。</p>
 
+<h3>更新Octopress</h3>
+
+<p>每过一段时间，可能需要<a href="http://octopress.org/docs/updating/">更新一下Octopress版本</a>，使之保持最新。</p>
+
 <h3>配置博客信息</h3>
 
 <p>修改Octopress/_config.yml，参考http://octopress.org/docs/configuring/ ，示例如下，若包含中文，请将文件格式保存成utf-8的格式。</p>
@@ -163,6 +167,36 @@ disqus_show_comment_count: true
 </pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Awesome!&quot;</span> <span class="k">unless</span> <span class="n">lame</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+<h3>添加”关于我”</h3>
+
+<p>在source下新建about目录，并在里面添加<code>index.markdown</code>文件。<br/>
+编辑导航条<code>source/_includes/custom/navigation.html</code><br/>
+注意:<code>index.markdown</code>文件需要加上头，否则会找不到。</p>
+
+<h3>首页只显示摘要</h3>
+
+<p>在文中加入<code>&lt;!--more--&gt;</code>来控制摘要截取位置。<br/>
+修改_config.yml里的excerpt_link。</p>
+
+<h3>更新文章</h3>
+
+<pre><code>rake new_post["title"]
+rake generate       #发布文件到public目录
+rake watch          #监控source和sass目录的变动
+rake preview        #启动服务器并监控变动，通过http://localhost:4000预览
+rake generate
+rake deploy
+</code></pre>
+
+<h3>保存源代码</h3>
+
+<p>在项目里建立source分支用于保存所有的代码（配置，sass，文章）。</p>
+
+<pre><code>git add .
+git commit -m 'blog'
+git push origin source
+</code></pre>
 ]]></content>
   </entry>
   
