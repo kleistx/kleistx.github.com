@@ -4,7 +4,7 @@
   <title><![CDATA[Xway]]></title>
   <link href="http://kleistx.github.com/atom.xml" rel="self"/>
   <link href="http://kleistx.github.com/"/>
-  <updated>2012-05-28T00:37:20+08:00</updated>
+  <updated>2012-05-28T01:48:14+08:00</updated>
   <id>http://kleistx.github.com/</id>
   <author>
     <name><![CDATA[xway]]></name>
@@ -115,10 +115,9 @@ simple_search: http://google.com/search
 description:
 </code></pre>
 
-<h3>创建新文章和新页面</h3>
+<h3>创建新文章</h3>
 
 <pre><code>rake new_post["article name"]
-rake new_page["page name"]
 </code></pre>
 
 <p>文章创建后，可在source/_post文件夹下找到，推荐使用<a href="http://mouapp.com/">Mou</a>编辑，更新之后需要重新生成静态页面，并重新部署。</p>
@@ -168,26 +167,23 @@ disqus_show_comment_count: true
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h3>添加”关于我”</h3>
+<h3>添加新页面</h3>
 
-<p>在source下新建about目录，并在里面添加<code>index.markdown</code>文件。<br/>
-编辑导航条<code>source/_includes/custom/navigation.html</code><br/>
-注意:<code>index.markdown</code>文件需要加上头，否则会找不到。</p>
+<p>例如在导航中增加<code>'About'</code>  ,首先：</p>
+
+<pre><code>rake new_page["page name"]
+</code></pre>
+
+<p>会在在source下新建about目录，并在里面添加<code>index.markdown</code>文件。<br/>
+然后，编辑导航条<code>source/_includes/custom/navigation.html</code>  ，添加上</p>
+
+<pre><code>&lt;li&gt;&lt;a href="http://kleistx.github.com/About"&gt;About&lt;/a&gt;&lt;/li&gt;  
+</code></pre>
 
 <h3>首页只显示摘要</h3>
 
 <p>在文中加入<code>&lt;!--more--&gt;</code>来控制摘要截取位置。<br/>
 修改_config.yml里的excerpt_link。</p>
-
-<h3>更新文章</h3>
-
-<pre><code>rake new_post["title"]
-rake generate       #发布文件到public目录
-rake watch          #监控source和sass目录的变动
-rake preview        #启动服务器并监控变动，通过http://localhost:4000预览
-rake generate
-rake deploy
-</code></pre>
 
 <h3>保存源代码</h3>
 
@@ -243,8 +239,8 @@ office 2011：微软的办公套件。</p>
 <h3>效率工具</h3>
 
 <p>evernote：免费版已够用，记录笔记，支持云同步。<br/>
-everbox：类似dropbox，盛大云存储客户端。
-google drive：google的云端硬盘。
+everbox：类似dropbox，盛大云存储客户端。 <br/>
+google drive：google的云端硬盘。 <br/>
 mind note：思维导图工具。<br/>
 alfred：快速启动工具，类似windows下launchy。</p>
 
@@ -259,7 +255,7 @@ ocrkit：转换扫描版pdf成文字版。</p>
 <h3>多媒体</h3>
 
 <p>mplayerx：开源媒体播放器，通杀所有格式。<br/>
-pptv网络电视：在线看电影。
+pptv网络电视：在线看电影。<br/>
 vox：音频播放器，短小精悍。<br/>
 diumoo：豆瓣电台客户端。<br/>
 guitar pro：吉他六线谱编辑和播放软件，学吉他必备。    <br/>
