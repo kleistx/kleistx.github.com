@@ -4,7 +4,7 @@
   <title><![CDATA[Xway]]></title>
   <link href="http://kleistx.github.com/atom.xml" rel="self"/>
   <link href="http://kleistx.github.com/"/>
-  <updated>2012-05-28T22:17:31+08:00</updated>
+  <updated>2012-05-28T22:23:08+08:00</updated>
   <id>http://kleistx.github.com/</id>
   <author>
     <name><![CDATA[xway]]></name>
@@ -177,7 +177,7 @@ disqus_show_comment_count: true
 <p>会在在source下新建about目录，并在里面添加<code>index.markdown</code>文件。<br/>
 然后，编辑导航条<code>source/_includes/custom/navigation.html</code>  ，添加上</p>
 
-<pre><code>&lt;li&gt;&lt;a href="http://kleistx.github.com/About"&gt;About&lt;/a&gt;&lt;/li&gt;  
+<pre><code>&lt;li&gt;&lt;a href="http://kleistx.github.com/about"&gt;About&lt;/a&gt;&lt;/li&gt;  
 </code></pre>
 
 <h3>首页只显示摘要</h3>
