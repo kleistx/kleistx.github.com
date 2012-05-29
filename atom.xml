@@ -4,7 +4,7 @@
   <title><![CDATA[Xway]]></title>
   <link href="http://kleistx.github.com/atom.xml" rel="self"/>
   <link href="http://kleistx.github.com/"/>
-  <updated>2012-05-29T01:27:31+08:00</updated>
+  <updated>2012-05-29T22:21:42+08:00</updated>
   <id>http://kleistx.github.com/</id>
   <author>
     <name><![CDATA[xway]]></name>
@@ -184,6 +184,11 @@ disqus_show_comment_count: true
 
 <p>在文中加入<code>&lt;!--more--&gt;</code>来控制摘要截取位置。<br/>
 修改_config.yml里的excerpt_link。</p>
+
+<h3>修改标题字体</h3>
+
+<p>先去<a href="http://www.google.com/webfonts">google webfonts</a>挑两款字体，将生成的链接拷贝下来，加入 <code>/source/_includes/custom/head.html</code> 。<br/>
+然后修改 <code>sass/custom/_font.scss</code>，分别将标题和副标题的字体设置为刚才挑选的两款。</p>
 
 <h3>保存源代码</h3>
 
