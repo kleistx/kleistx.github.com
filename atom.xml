@@ -4,7 +4,7 @@
   <title><![CDATA[Xway]]></title>
   <link href="http://kleistx.github.com/atom.xml" rel="self"/>
   <link href="http://kleistx.github.com/"/>
-  <updated>2012-05-29T22:42:37+08:00</updated>
+  <updated>2012-06-01T22:07:49+08:00</updated>
   <id>http://kleistx.github.com/</id>
   <author>
     <name><![CDATA[xway]]></name>
@@ -20,9 +20,9 @@
     <id>http://kleistx.github.com/blog/dive-into-python-notes-1</id>
     <content type="html"><![CDATA[<p>以下是我最近阅读<a href="http://woodpecker.org.cn/diveintopython3/table-of-contents.html#your-first-python-program">《深入python3》</a>后记的笔记。</p>
 
-<h3>第一份Python程序</h3>
+<h2>第一份Python程序</h2>
 
-<h4>条件表达式</h4>
+<h3>条件表达式</h3>
 
 <p>C语言中的条件表达式是这样 <code>x = condition ? true_value : false_value</code><br/>
 python中是这样 <code>x = true_value if condition else false_value</code>，例如：</p>
@@ -30,51 +30,53 @@ python中是这样 <code>x = true_value if condition else false_value</code>，�
 <pre><code>X = true if logging else flase
 </code></pre>
 
-<h4>文档字符串docstring</h4>
+<h3>文档字符串docstring</h3>
 
 <p>紧跟在函数声明的下一行，用引号或三重引号包围，描述函数必备，在有些ide，当用鼠标指向函数名时，其docstring以tooltip的方式显示出来，很便利。<br/>
 <a href="http://www.python.org/dev/peps/pep-0257/">PEP 257: Docstring</a> 约定解释了用什么来从大量的 docstring 中分辨出一个好的 docstring。</p>
 
-<h4>异常</h4>
+<h3>异常</h3>
 
 <p>在被调用程序中使用 raise 语句来抛出异常，在调用程序中使用 try&#8230;except 块来处理异常。</p>
 
-<h4><code>__name__</code> 和 <code>__main__</code></h4>
+<h3><code>__name__</code> 和 <code>__main__</code></h3>
 
 <pre><code>if __name__ == '__main__'
 </code></pre>
 
 <p>这种写法的原理：模块是对象，所有的模块对象都有一个内置的属性 <code>__name__</code> ,如果import这个模块，那么<code>__name__</code>就等于这个模块的文件名（不包含路径和扩展名），但如果将此模块当做一个独立的程序来运行的话，<code>__name__</code> 将是一个特殊的默认值<code>__main__</code>，所以才用此if语句来判断。</p>
 
-<h3>内置数据类型</h3>
+<h2>内置数据类型</h2>
 
 <p>八大内置数据类型，booleans，numbers，strings，bytes，lists，tuples，sets，dictionaries。</p>
 
-<ul>
-<li>用 type() 函数来检测任何值或变量的类型。</li>
-<li><p>用 isinstance() 函数判断某个值或变量是否为给定某个类型。如：</p>
+<p>用 type() 函数来检测任何值或变量的类型。<br/>
+用 isinstance() 函数判断某个值或变量是否为给定某个类型。如：</p>
 
-<pre><code>  isinstance(1, int)
-</code></pre></li>
-</ul>
+<pre><code>isinstance(1, int)
+</code></pre>
 
-
-<h4>常见数值运算</h4>
+<h3>常见数值运算</h3>
 
 <p>其他的都和c语言差不多，除了这两个： <code>//</code>除后取整 ； <code>**</code>求幂运算 ；</p>
 
-<h4>列表<code>[ ]</code></h4>
+<h3>列表<code>[ ]</code></h3>
 
 <ul>
 <li>列表用 <code>[ ]</code> 来定义。</li>
 <li>可用<code>list[-1]</code>来从反方向索引。</li>
 <li>布尔上下文，空列表为false，有元素的列表为true。</li>
-<li><p>切片几种用法</p>
+</ul>
 
-<pre><code>  list[1:3] ; list[1:-1]; list[0:3]; list[:3]; list[3:]; list[:]
+
+<p>切片几种用法</p>
+
+<pre><code>list[1:3] ; list[1:-1]; list[0:3]; list[:3]; list[3:]; list[:]      
 </code></pre>
 
-<p>list[:]是一个新列表，与list并不一样，只是拥有完全相同的元素，是对列表进行复制的一条捷径。</p></li>
+<p> list[:]是一个新列表，与list并不一样，只是拥有完全相同的元素，是对列表进行复制的一条捷径。</p>
+
+<ul>
 <li>增加元素
 
 <ul>
@@ -103,7 +105,7 @@ python中是这样 <code>x = true_value if condition else false_value</code>，�
 </ul>
 
 
-<h4>元组<code>( )</code></h4>
+<h3>元组<code>( )</code></h3>
 
 <p>以下是与list的相同点：</p>
 
@@ -126,27 +128,24 @@ python中是这样 <code>x = true_value if condition else false_value</code>，�
 
 <p><strong>元组的优点：</strong></p>
 
-<ul>
-<li><p>可同时赋多个值</p>
+<p>可同时赋多个值</p>
 
-<pre><code>  v=('a',2,true)
-  (x,y,z) = v
+<pre><code>v=('a',2,true)
+(x,y,z) = v
 </code></pre>
 
-<p>有多种用途，例如：</p>
+<p> 有多种用途，例如：</p>
 
-<pre><code>   (MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY) =   range(7)
+<pre><code>(MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY)=range(7)
 </code></pre>
 
-<p>或者让函数返回元组，赋值给不同的变量。</p></li>
-<li>进行遍历操作比列表快。</li>
-<li>“写保护”，让代码更安全。</li>
-<li>可用作字典键，列表不行。</li>
-<li>与列表可以相互转换，<code>tuple()</code>冻结列表，<code>list()</code>融合元组。</li>
-</ul>
+<p>或者让函数返回元组，赋值给不同的变量。
+* 进行遍历操作比列表快。
+* “写保护”，让代码更安全。
+*  可用作字典键，列表不行。
+*  与列表可以相互转换，<code>tuple()</code>冻结列表，<code>list()</code>融合元组。</p>
 
-
-<h4>集合<code>{ }</code></h4>
+<h3>集合<code>{ }</code></h3>
 
 <ul>
 <li>集合用 <code>{ }</code> 来定义，用此方法定义时，至少含一个元素，纯<code>{ }</code>是表示空字典。</li>
@@ -172,18 +171,78 @@ python中是这样 <code>x = true_value if condition else false_value</code>，�
 </ul>
 
 
-<h4>字典<code>{ }</code></h4>
+<h3>字典<code>{ }</code></h3>
 
 <ul>
 <li>集合装载唯一值，所以会自动消除重复元素。</li>
-<li><p>同一字典的值可以装入不同数据类型和任何对象，但是键只能是数据类型，如：</p>
-
-<pre><code> SUFFIXES = {1000: ['KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
-             1024: ['KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']}
-</code></pre></li>
-<li>可以使用<code>len()</code>和<code>in</code></li>
 </ul>
 
+
+<p>同一字典的值可以装入不同数据类型和任何对象，但是键只能是数据类型，如：</p>
+
+<pre><code>{1000: ['KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+ 1024: ['KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']}
+</code></pre>
+
+<ul>
+<li>可以使用<code>len()</code>和<code>in</code>。</li>
+<li>可以使用类似集合的增加和减少元素的方法。</li>
+</ul>
+
+
+<h2>推导式</h2>
+
+<p>紧凑，直观，有点像sql语句。</p>
+
+<h3>列表推导式</h3>
+
+<p>对某列表中每个元素应用一个函数，将其映射到另一个列表。<br/>
+将a_list中的元素乘以3</p>
+
+<pre><code>[elem * 3 for elem in a_list]
+</code></pre>
+
+<p>将当前目录下所有xml文件加上全路径</p>
+
+<pre><code>[os.path.realpath(f) for f in glob.glob('*.xml')]  
+</code></pre>
+
+<p>过滤列表，返回当前目录下所有大小大于6000字节的py文件</p>
+
+<pre><code>[f for f in glob.glob('*.py') if os.stat(f).st_size &gt; 6000]
+</code></pre>
+
+<p>返回元组列表，每个元组包含文件字节数和绝对路径</p>
+
+<pre><code>[(os.stat(f).st_size, os.path.realpath(f)) for f in glob.glob('*.xml')] 
+</code></pre>
+
+<h3>字典推导式</h3>
+
+<p>与列表推导式不同之处有两点：<br/>
+1.被花括号包围而非方括号。 <br/>
+2.对于每个元素它包含由冒号分隔的两个表达式。冒号前为键，其后为值。</p>
+
+<pre><code>{f:os.stat(f) for f in glob.glob('*.py')}
+</code></pre>
+
+<p>也可以加上if形成过滤字典</p>
+
+<pre><code>{os.path.splitext(f)[0]:humansize.approximate_size(meta.st_size) \ 
+     for f, meta in metadata_dict.items() if meta.st_size &gt; 6000} 
+</code></pre>
+
+<p>小技巧，交换字典的键和值</p>
+
+<pre><code>{value:key for key, value in a_dict.items()}
+</code></pre>
+
+<h3>集合推导式</h3>
+
+<p>与列表推导式和字典推导式类似，其输入不一定是集合，可以是任何序列：</p>
+
+<pre><code> {2**x for x in range(10)} 
+</code></pre>
 ]]></content>
   </entry>
   
