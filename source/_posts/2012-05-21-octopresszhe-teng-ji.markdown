@@ -59,9 +59,8 @@ categories: [tools]
 	simple_search: http://google.com/search
 	description:
 
-###创建新文章和新页面
+###创建新文章
 	rake new_post["article name"]
-	rake new_page["page name"]
 文章创建后，可在source/_post文件夹下找到，推荐使用[Mou](http://mouapp.com/)编辑，更新之后需要重新生成静态页面，并重新部署。
 
 	rake generate
@@ -97,20 +96,21 @@ Awesome code snippet
 {% codeblock Time to be Awesome - awesome.rb %}
 puts "Awesome!" unless lame
 {% endcodeblock %}
-###添加”关于我”
-在source下新建about目录，并在里面添加`index.markdown`文件。  
-编辑导航条`source/_includes/custom/navigation.html`  
-注意:`index.markdown`文件需要加上头，否则会找不到。  
+###添加新页面
+例如在导航中增加`'About'`  ,首先：
+	
+	rake new_page["page name"]
+
+会在在source下新建about目录，并在里面添加`index.markdown`文件。  
+然后，编辑导航条`source/_includes/custom/navigation.html`  ，添加上
+
+	<li><a href="{{ root_url }}/about">About</a></li>  
 ###首页只显示摘要
 在文中加入`<!--more-->`来控制摘要截取位置。  
 修改_config.yml里的excerpt_link。  
-###更新文章
-	rake new_post["title"]
-	rake generate       #发布文件到public目录
-	rake watch          #监控source和sass目录的变动
-	rake preview        #启动服务器并监控变动，通过http://localhost:4000预览
-	rake generate
-	rake deploy
+###修改标题字体
+先去[google webfonts](http://www.google.com/webfonts)挑两款字体，将生成的链接拷贝下来，加入 `/source/_includes/custom/head.html` 。  
+然后修改 `sass/custom/_font.scss`，分别将标题和副标题的字体设置为刚才挑选的两款。  
 ###保存源代码
 在项目里建立source分支用于保存所有的代码（配置，sass，文章）。
 
