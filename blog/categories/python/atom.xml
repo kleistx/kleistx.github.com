@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | Xway]]></title>
   <link href="http://kleistx.github.com/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://kleistx.github.com/"/>
-  <updated>2012-07-01T17:50:53+08:00</updated>
+  <updated>2012-07-01T19:07:01+08:00</updated>
   <id>http://kleistx.github.com/</id>
   <author>
     <name><![CDATA[xway]]></name>
@@ -18,44 +18,47 @@
     <link href="http://kleistx.github.com/blog/zai-macshang-shi-yong-mysqldb/"/>
     <updated>2012-07-01T17:48:00+08:00</updated>
     <id>http://kleistx.github.com/blog/zai-macshang-shi-yong-mysqldb</id>
-    <content type="html"><![CDATA[<h2>在mac上使用MySQLdb</h2>
+    <content type="html"><![CDATA[<p>Django的缘故，需要用到python下的mysql接口，但mac上安装MySQLdb比我想象的要麻烦的多，看起来一切顺利，就是用不成，折腾了半天才发现一些注意事项，现将其写在这里：</p>
 
-<p>Django的缘故，需要用到python下的mysql接口，但mac上安装MySQLdb比我想象的要麻烦的多，看起来一切顺利，就是用不成，折腾了半天才发现一些注意事项，现将其写在这里：</p>
+<h2>安装步骤</h2>
 
-<h3>安装步骤</h3>
+<h3>1.安装正确的python和mysql版本</h3>
 
-<ol>
-<li><p>先要搞清楚mac上的python和mysql是什么版本（32位还是64位），用这个命令：</p>
+<p>若未安装python和mysql，可以使用二者官方网站上的img镜像安装，但记住若你的mac os是64位的，一定安装<strong>64位</strong>的版本。<br/>
+若已安装python和mysql，用file命令搞清楚mac上的python和mysql是什么版本（32位还是64位）：</p>
 
 <pre><code>file $(which python)
 file $(which mysql)
 </code></pre>
 
-<p>现在的mac基本都是64位，看看是不是，千万别搞错，否则安装肯定出错。</p></li>
-<li><p>使用pip或者easy_install来安装MySQL-python，建议用pip安装：</p>
+<p>现在的mac基本都是64位，看看是不是，千万别搞错，否则安装肯定出错。</p>
 
-<pre><code>pip install  MySQL-python
-</code></pre></li>
-<li><p>进入python，输入</p>
+<h3>2.增加路径</h3>
 
-<pre><code>import MySQLdb
-</code></pre>
-
-<p>若无问题，则安装成功。</p></li>
-</ol>
-
-
-<h3>注意事项</h3>
-
-<ol>
-<li><p>若是未安装python和mysql，可以使用二者官方网站上的img镜像安装，但记住若你的mac os是64位的，一定安装<strong>64位</strong>的版本。</p></li>
-<li><p>安装上述软件之后，须将其加入环境变量path，一般来说，python的路径在<code>/Library/Frameworks/Python.framework/Versions/2.7/bin</code>，mysql的路径在<code>/usr/local/mysql/bin</code>，增加方法：</p>
+<p>安装上述软件之后，须将其加入环境变量path，一般来说，python的路径在<code>/Library/Frameworks/Python.framework/Versions/2.7/bin</code>，mysql的路径在<code>/usr/local/mysql/bin</code>，增加方法：</p>
 
 <pre><code>sudo vim /etc/paths
 </code></pre>
 
-<p>然后将路径添加在里面即可。</p></li>
-<li><p>mac下用DMG格式的mysql安装的话，卸载很麻烦。卸载方法：</p>
+<p>将路径添加在里面即可。</p>
+
+<h3>3.安装MySQL-python</h3>
+
+<p>使用pip或者easy_install来安装MySQL-python，建议用pip安装：</p>
+
+<pre><code>pip install  MySQL-python
+</code></pre>
+
+<p>完成之后进入python，import一下：</p>
+
+<pre><code>import MySQLdb
+</code></pre>
+
+<p>若无问题，则安装成功。</p>
+
+<h3>4.卸载mysql的问题</h3>
+
+<p>mac下用DMG格式的mysql安装的话，出错后卸载很麻烦，卸载方法如下：</p>
 
 <pre><code>sudo rm /usr/local/mysql
 sudo rm -rf /usr/local/mysql*
@@ -68,9 +71,7 @@ sudo rm -rf /Library/Receipts/MySQL*
 sudo rm -rf /var/db/receipts/com.mysql.*
 </code></pre>
 
-<p>最后这条很多文章都丢了，切记切记。</p></li>
-</ol>
-
+<p>看起来很简单，可是浪费了我整个下午。</p>
 ]]></content>
   </entry>
   
