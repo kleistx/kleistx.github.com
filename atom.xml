@@ -4,7 +4,7 @@
   <title><![CDATA[Xway]]></title>
   <link href="http://kleistx.github.com/atom.xml" rel="self"/>
   <link href="http://kleistx.github.com/"/>
-  <updated>2012-08-09T00:52:16+08:00</updated>
+  <updated>2012-08-09T01:05:06+08:00</updated>
   <id>http://kleistx.github.com/</id>
   <author>
     <name><![CDATA[xway]]></name>
@@ -65,43 +65,41 @@
 <span class='line-number'>33</span>
 <span class='line-number'>34</span>
 <span class='line-number'>35</span>
-<span class='line-number'>36</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">Lychrel_Number</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">counter</span><span class="p">):</span>
-</span><span class='line'>      <span class="sd">&#39;&#39;&#39;验证一个数是否为利克瑞尔数&#39;&#39;&#39;</span>
-</span><span class='line'>      <span class="nb">sum</span> <span class="o">=</span> <span class="n">num</span> <span class="o">+</span> <span class="n">reverse_num</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
-</span><span class='line'>      <span class="k">print</span> <span class="s">&#39;</span><span class="si">%d</span><span class="s">+</span><span class="si">%d</span><span class="s">=</span><span class="si">%d</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">reverse_num</span><span class="p">(</span><span class="n">num</span><span class="p">),</span><span class="nb">sum</span><span class="p">)</span>
-</span><span class='line'>      <span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span>    <span class="c">#迭代计数</span>
-</span><span class='line'>      <span class="k">if</span> <span class="n">is_palindrome</span><span class="p">(</span><span class="nb">sum</span><span class="p">):</span>
-</span><span class='line'>          <span class="k">print</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%d</span><span class="s"> times!&#39;</span><span class="o">%</span><span class="n">counter</span><span class="p">)</span>
-</span><span class='line'>          <span class="k">return</span>
-</span><span class='line'>      <span class="k">else</span><span class="p">:</span>
-</span><span class='line'>          <span class="n">Lychrel_Number</span><span class="p">(</span><span class="nb">sum</span><span class="p">,</span><span class="n">counter</span><span class="p">)</span>
-</span><span class='line'>          
-</span><span class='line'>    <span class="k">def</span> <span class="nf">reverse_num</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-</span><span class='line'>      <span class="sd">&#39;&#39;&#39;将一个数翻转&#39;&#39;&#39;</span>
-</span><span class='line'>      <span class="n">l</span> <span class="o">=</span> <span class="n">num_to_list</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>            
-</span><span class='line'>      <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span class='line'>      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)):</span>
-</span><span class='line'>          <span class="n">r</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="n">l</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>        
-</span><span class='line'>      <span class="k">return</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">Lychrel_Number</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">counter</span><span class="p">):</span>
+</span><span class='line'>  <span class="sd">&#39;&#39;&#39;验证一个数是否为利克瑞尔数&#39;&#39;&#39;</span>
+</span><span class='line'>  <span class="nb">sum</span> <span class="o">=</span> <span class="n">num</span> <span class="o">+</span> <span class="n">reverse_num</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">print</span> <span class="s">&#39;</span><span class="si">%d</span><span class="s">+</span><span class="si">%d</span><span class="s">=</span><span class="si">%d</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">reverse_num</span><span class="p">(</span><span class="n">num</span><span class="p">),</span><span class="nb">sum</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span>    <span class="c">#迭代计数</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">is_palindrome</span><span class="p">(</span><span class="nb">sum</span><span class="p">):</span>
+</span><span class='line'>      <span class="k">print</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%d</span><span class="s"> times!&#39;</span><span class="o">%</span><span class="n">counter</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">return</span>
+</span><span class='line'>  <span class="k">else</span><span class="p">:</span>
+</span><span class='line'>      <span class="n">Lychrel_Number</span><span class="p">(</span><span class="nb">sum</span><span class="p">,</span><span class="n">counter</span><span class="p">)</span>
+</span><span class='line'>      
+</span><span class='line'><span class="k">def</span> <span class="nf">reverse_num</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span class='line'>  <span class="sd">&#39;&#39;&#39;将一个数翻转&#39;&#39;&#39;</span>
+</span><span class='line'>  <span class="n">l</span> <span class="o">=</span> <span class="n">num_to_list</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>            
+</span><span class='line'>  <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)):</span>
+</span><span class='line'>      <span class="n">r</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="n">l</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>        
+</span><span class='line'>  <span class="k">return</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">num_to_list</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-</span><span class='line'>      <span class="sd">&#39;&#39;&#39;将一个数从个位开始放入一个列表&#39;&#39;&#39;</span>
-</span><span class='line'>      <span class="n">l</span><span class="o">=</span><span class="p">[]</span>
-</span><span class='line'>      <span class="k">while</span> <span class="n">n</span><span class="p">:</span>
-</span><span class='line'>          <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="o">%</span><span class="mi">10</span><span class="p">)</span>
-</span><span class='line'>          <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">/</span><span class="mi">10</span>
-</span><span class='line'>      <span class="k">return</span> <span class="n">l</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">num_to_list</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span class='line'>  <span class="sd">&#39;&#39;&#39;将一个数从个位开始放入一个列表&#39;&#39;&#39;</span>
+</span><span class='line'>  <span class="n">l</span><span class="o">=</span><span class="p">[]</span>
+</span><span class='line'>  <span class="k">while</span> <span class="n">n</span><span class="p">:</span>
+</span><span class='line'>      <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="o">%</span><span class="mi">10</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">/</span><span class="mi">10</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">l</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">is_palindrome</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-</span><span class='line'>      <span class="sd">&#39;&#39;&#39;判断回文数&#39;&#39;&#39;</span>
-</span><span class='line'>      <span class="n">original</span> <span class="o">=</span> <span class="n">num_to_list</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-</span><span class='line'>      <span class="n">result</span> <span class="o">=</span> <span class="n">original</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>       <span class="c">#翻转序列</span>
-</span><span class='line'>      <span class="k">return</span> <span class="n">original</span> <span class="o">==</span> <span class="n">result</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">is_palindrome</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span class='line'>  <span class="sd">&#39;&#39;&#39;判断回文数&#39;&#39;&#39;</span>
+</span><span class='line'>  <span class="n">original</span> <span class="o">=</span> <span class="n">num_to_list</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">result</span> <span class="o">=</span> <span class="n">original</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>       <span class="c">#翻转序列</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">original</span> <span class="o">==</span> <span class="n">result</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="n">num</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;please enter a number:&quot;</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">Lychrel_Number</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+</span><span class='line'><span class="n">num</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;please enter a number:&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">Lychrel_Number</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
