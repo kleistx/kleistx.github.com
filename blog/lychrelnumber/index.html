@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>旧日读书时光 - Xway</title>
+  <title>回文数和利克瑞尔数 - Xway</title>
   <meta name="author" content="xway">
 
   
-  <meta name="description" content="最怀恋小时候的那些闲暇时光，世界充满了不可知，了解外界的窗口仅仅就是电视机，没有身处于时代洪流中的匆忙，得以慢慢的学习，那是何等的惬意啊，为了一点小知而洋洋得意，抓住什么书就了解什么，不管他是翻译晦涩的，还是文笔粗陋的，还是不明逻辑的，统统并收。那时看了很多其实很有意思，但今天决不会再花时间的书 &hellip;">
+  <meta name="description" content="回文数就是看起来左右对称的自然数，比如121、876678，如果将一个自然数与将该数按位翻转后形成的新数相加，并将此过程反复迭代后，往往都会得出一个回文数。例如： 56在一次迭代后形成回文数：56+65 = 121. 57在两次迭代后形成回文数：57+75 = 132, 132+231 = 363 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://kleistx.github.com/blog/jiu-ri-du-shu-shi-guang/">
+  <link rel="canonical" href="http://kleistx.github.com/blog/lychrelnumber/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">旧日读书时光</h1>
+      <h1 class="entry-title">回文数和利克瑞尔数</h1>
     
     
       <p class="meta">
@@ -97,7 +97,7 @@
   
 
 
-<time datetime="2012-05-11T00:01:00+08:00" pubdate data-updated="true">May 11<span>th</span>, 2012</time>
+<time datetime="2012-08-09T00:21:00+08:00" pubdate data-updated="true">Aug 9<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -106,8 +106,68 @@
   </header>
 
 
-<div class="entry-content"><p>最怀恋小时候的那些闲暇时光，世界充满了不可知，了解外界的窗口仅仅就是电视机，没有身处于时代洪流中的匆忙，得以慢慢的学习，那是何等的惬意啊，为了一点小知而洋洋得意，抓住什么书就了解什么，不管他是翻译晦涩的，还是文笔粗陋的，还是不明逻辑的，统统并收。那时看了很多其实很有意思，但今天决不会再花时间的书。<br/>
-今天的时间总是不够用，似乎要把时间留给最重要的学问，最有用的技术，渐渐的反而看书的范围越来越窄，无法突破了。</p>
+<div class="entry-content"><p>回文数就是看起来左右对称的自然数，比如121、876678，如果将一个自然数与将该数按位翻转后形成的新数相加，并将此过程反复迭代后，往往都会得出一个回文数。例如：</p>
+
+<pre><code>56在一次迭代后形成回文数：56+65 = 121.  
+57在两次迭代后形成回文数：57+75 = 132, 132+231 = 363.  
+89经过少有的24次迭代（它是10,000以下的数中迭代次数最多的）而得到回文数8813200023188.    
+</code></pre>
+
+<p>假如某数翻转又不停迭代相加后得不出回文数呢？那么它就被称为利克瑞尔数（Lychrel Number）。 <br/>
+利克瑞尔数实际上很罕见，而且难以证明，90%的10000以内的数经过不多于7次迭代后会变成回文数，
+唯一例外的是196，至今还未被迭代成回文数，也许它就是最小的利克瑞尔数。<br/>
+科普完毕，下面写个小程序来验证利克瑞尔数：</p>
+
+<pre><code>def Lychrel_Number(num,counter):
+    '''验证一个数是否为利克瑞尔数'''
+    sum = num + reverse_num(num)
+    print '%d+%d=%d'%(num,reverse_num(num),sum)
+    counter = counter + 1    #迭代计数
+    if is_palindrome(sum):
+        print('%d times!'%counter)
+        return
+    else:
+        Lychrel_Number(sum,counter) 
+
+def reverse_num(n):
+    '''将一个数翻转'''
+    l = num_to_list(n)          
+    r = 0
+    for i in range(len(l)):
+        r = r + l.pop()*pow(10,i)       
+    return(r)
+
+def num_to_list(n):
+    '''将一个数从个位开始放入一个列表'''
+    l=[]
+    while n:
+        l.append(n%10)
+        n = n/10
+    return l
+
+def is_palindrome(n):
+    '''判断回文数'''
+    original = num_to_list(n)
+    result = original[::-1]     #翻转序列
+    return original == result
+
+num = input("please enter a number:")
+Lychrel_Number(num,0)
+</code></pre>
+
+<p>运行示例如下：</p>
+
+<pre><code>please enter a number:99
+99+99=198
+198+891=1089
+1089+9801=10890
+10890+9801=20691
+20691+19602=40293
+40293+39204=79497
+6 times!
+</code></pre>
+
+<p>别验证196哦，会溢出的哦！</p>
 </div>
 
 
@@ -130,12 +190,12 @@
   
 
 
-<time datetime="2012-05-11T00:01:00+08:00" pubdate data-updated="true">May 11<span>th</span>, 2012</time>
+<time datetime="2012-08-09T00:21:00+08:00" pubdate data-updated="true">Aug 9<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/life/'>life</a>
+    <a class='category' href='/blog/categories/python/'>python</a>
   
 </span>
 
@@ -144,7 +204,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kleistx.github.com/blog/jiu-ri-du-shu-shi-guang/" data-via="" data-counturl="http://kleistx.github.com/blog/jiu-ri-du-shu-shi-guang/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kleistx.github.com/blog/lychrelnumber/" data-via="" data-counturl="http://kleistx.github.com/blog/lychrelnumber/" >Tweet</a>
   
   
   
@@ -153,8 +213,8 @@
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/zai-macshang-shi-yong-mysqldb/" title="Previous Post: 在mac上使用MySQLdb">&laquo; 在mac上使用MySQLdb</a>
       
-        <a class="basic-alignment right" href="/blog/macchang-yong-di-san-fang-ruan-jian-tui-jian/" title="Next Post: Mac常用第三方软件推荐">Mac常用第三方软件推荐 &raquo;</a>
       
     </p>
   </footer>
@@ -226,8 +286,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://kleistx.github.com/blog/jiu-ri-du-shu-shi-guang/';
-        var disqus_url = 'http://kleistx.github.com/blog/jiu-ri-du-shu-shi-guang/';
+        var disqus_identifier = 'http://kleistx.github.com/blog/lychrelnumber/';
+        var disqus_url = 'http://kleistx.github.com/blog/lychrelnumber/';
         var disqus_script = 'embed.js';
       
     (function () {

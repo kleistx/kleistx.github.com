@@ -9,7 +9,7 @@
   <meta name="author" content="xway">
 
   
-  <meta name="description" content="Django的缘故，需要用到python下的mysql接口，但mac上安装MySQLdb比我想象的要麻烦的多，看起来一切顺利，就是用不成，折腾了半天才发现一些注意事项，现将其写在这里： 安装步骤 1.安装正确的python和mysql版本 若未安装python和mysql， &hellip;">
+  <meta name="description" content="回文数就是看起来左右对称的自然数，比如121、876678，如果将一个自然数与将该数按位翻转后形成的新数相加，并将此过程反复迭代后，往往都会得出一个回文数。例如： 56在一次迭代后形成回文数：56+65 = 121. 57在两次迭代后形成回文数：57+75 = 132, 132+231 = 363 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,105 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/lychrelnumber/">回文数和利克瑞尔数</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-09T00:21:00+08:00" pubdate data-updated="true">Aug 9<span>th</span>, 2012</time>
+        
+         | <a href="/blog/lychrelnumber/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>回文数就是看起来左右对称的自然数，比如121、876678，如果将一个自然数与将该数按位翻转后形成的新数相加，并将此过程反复迭代后，往往都会得出一个回文数。例如：</p>
+
+<pre><code>56在一次迭代后形成回文数：56+65 = 121.  
+57在两次迭代后形成回文数：57+75 = 132, 132+231 = 363.  
+89经过少有的24次迭代（它是10,000以下的数中迭代次数最多的）而得到回文数8813200023188.    
+</code></pre>
+
+<p>假如某数翻转又不停迭代相加后得不出回文数呢？那么它就被称为利克瑞尔数（Lychrel Number）。 <br/>
+利克瑞尔数实际上很罕见，而且难以证明，90%的10000以内的数经过不多于7次迭代后会变成回文数，
+唯一例外的是196，至今还未被迭代成回文数，也许它就是最小的利克瑞尔数。<br/>
+科普完毕，下面写个小程序来验证利克瑞尔数：</p>
+
+<pre><code>def Lychrel_Number(num,counter):
+    '''验证一个数是否为利克瑞尔数'''
+    sum = num + reverse_num(num)
+    print '%d+%d=%d'%(num,reverse_num(num),sum)
+    counter = counter + 1    #迭代计数
+    if is_palindrome(sum):
+        print('%d times!'%counter)
+        return
+    else:
+        Lychrel_Number(sum,counter) 
+
+def reverse_num(n):
+    '''将一个数翻转'''
+    l = num_to_list(n)          
+    r = 0
+    for i in range(len(l)):
+        r = r + l.pop()*pow(10,i)       
+    return(r)
+
+def num_to_list(n):
+    '''将一个数从个位开始放入一个列表'''
+    l=[]
+    while n:
+        l.append(n%10)
+        n = n/10
+    return l
+
+def is_palindrome(n):
+    '''判断回文数'''
+    original = num_to_list(n)
+    result = original[::-1]     #翻转序列
+    return original == result
+
+num = input("please enter a number:")
+Lychrel_Number(num,0)
+</code></pre>
+
+<p>运行示例如下：</p>
+
+<pre><code>please enter a number:99
+99+99=198
+198+891=1089
+1089+9801=10890
+10890+9801=20691
+20691+19602=40293
+40293+39204=79497
+6 times!
+</code></pre>
+
+<p>别验证196哦，会溢出的哦！</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -840,6 +939,10 @@ macbo：新浪微博客户端。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/lychrelnumber/">回文数和利克瑞尔数</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/zai-macshang-shi-yong-mysqldb/">在mac上使用MySQLdb</a>
       </li>
     
@@ -853,10 +956,6 @@ macbo：新浪微博客户端。</p>
     
       <li class="post">
         <a href="/blog/macchang-yong-di-san-fang-ruan-jian-tui-jian/">Mac常用第三方软件推荐</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/jiu-ri-du-shu-shi-guang/">旧日读书时光</a>
       </li>
     
   </ul>
