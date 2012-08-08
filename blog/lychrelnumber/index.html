@@ -118,42 +118,80 @@
 唯一例外的是196，至今还未被迭代成回文数，也许它就是最小的利克瑞尔数。<br/>
 科普完毕，下面写个小程序来验证利克瑞尔数：</p>
 
-<pre><code>def Lychrel_Number(num,counter):
-    '''验证一个数是否为利克瑞尔数'''
-    sum = num + reverse_num(num)
-    print '%d+%d=%d'%(num,reverse_num(num),sum)
-    counter = counter + 1    #迭代计数
-    if is_palindrome(sum):
-        print('%d times!'%counter)
-        return
-    else:
-        Lychrel_Number(sum,counter) 
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">Lychrel_Number</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">counter</span><span class="p">):</span>
+</span><span class='line'>      <span class="sd">&#39;&#39;&#39;验证一个数是否为利克瑞尔数&#39;&#39;&#39;</span>
+</span><span class='line'>      <span class="nb">sum</span> <span class="o">=</span> <span class="n">num</span> <span class="o">+</span> <span class="n">reverse_num</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">print</span> <span class="s">&#39;</span><span class="si">%d</span><span class="s">+</span><span class="si">%d</span><span class="s">=</span><span class="si">%d</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">reverse_num</span><span class="p">(</span><span class="n">num</span><span class="p">),</span><span class="nb">sum</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span>    <span class="c">#迭代计数</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">is_palindrome</span><span class="p">(</span><span class="nb">sum</span><span class="p">):</span>
+</span><span class='line'>          <span class="k">print</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%d</span><span class="s"> times!&#39;</span><span class="o">%</span><span class="n">counter</span><span class="p">)</span>
+</span><span class='line'>          <span class="k">return</span>
+</span><span class='line'>      <span class="k">else</span><span class="p">:</span>
+</span><span class='line'>          <span class="n">Lychrel_Number</span><span class="p">(</span><span class="nb">sum</span><span class="p">,</span><span class="n">counter</span><span class="p">)</span>
+</span><span class='line'>          
+</span><span class='line'>    <span class="k">def</span> <span class="nf">reverse_num</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span class='line'>      <span class="sd">&#39;&#39;&#39;将一个数翻转&#39;&#39;&#39;</span>
+</span><span class='line'>      <span class="n">l</span> <span class="o">=</span> <span class="n">num_to_list</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>            
+</span><span class='line'>      <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'>      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)):</span>
+</span><span class='line'>          <span class="n">r</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="n">l</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>        
+</span><span class='line'>      <span class="k">return</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">num_to_list</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span class='line'>      <span class="sd">&#39;&#39;&#39;将一个数从个位开始放入一个列表&#39;&#39;&#39;</span>
+</span><span class='line'>      <span class="n">l</span><span class="o">=</span><span class="p">[]</span>
+</span><span class='line'>      <span class="k">while</span> <span class="n">n</span><span class="p">:</span>
+</span><span class='line'>          <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="o">%</span><span class="mi">10</span><span class="p">)</span>
+</span><span class='line'>          <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">/</span><span class="mi">10</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">l</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">is_palindrome</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span class='line'>      <span class="sd">&#39;&#39;&#39;判断回文数&#39;&#39;&#39;</span>
+</span><span class='line'>      <span class="n">original</span> <span class="o">=</span> <span class="n">num_to_list</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">result</span> <span class="o">=</span> <span class="n">original</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>       <span class="c">#翻转序列</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">original</span> <span class="o">==</span> <span class="n">result</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">num</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;please enter a number:&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">Lychrel_Number</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
 
-def reverse_num(n):
-    '''将一个数翻转'''
-    l = num_to_list(n)          
-    r = 0
-    for i in range(len(l)):
-        r = r + l.pop()*pow(10,i)       
-    return(r)
-
-def num_to_list(n):
-    '''将一个数从个位开始放入一个列表'''
-    l=[]
-    while n:
-        l.append(n%10)
-        n = n/10
-    return l
-
-def is_palindrome(n):
-    '''判断回文数'''
-    original = num_to_list(n)
-    result = original[::-1]     #翻转序列
-    return original == result
-
-num = input("please enter a number:")
-Lychrel_Number(num,0)
-</code></pre>
 
 <p>运行示例如下：</p>
 
