@@ -4,7 +4,7 @@
   <title><![CDATA[Xway]]></title>
   <link href="http://kleistx.github.com/atom.xml" rel="self"/>
   <link href="http://kleistx.github.com/"/>
-  <updated>2012-08-09T01:05:06+08:00</updated>
+  <updated>2012-08-13T12:33:20+08:00</updated>
   <id>http://kleistx.github.com/</id>
   <author>
     <name><![CDATA[xway]]></name>
@@ -12,6 +12,286 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Django Book 2 ：Notes 1]]></title>
+    <link href="http://kleistx.github.com/blog/the-django-book-2-note-1/"/>
+    <updated>2012-08-13T11:11:00+08:00</updated>
+    <id>http://kleistx.github.com/blog/the-django-book-2-note-1</id>
+    <content type="html"><![CDATA[<h2>入门</h2>
+
+<ol>
+<li>先安装好python和mysql等。</li>
+<li>下载django，运行命令 <code>python setup.py install</code> 安装之。</li>
+<li>选择好安装目录，进入，运行命令 <code>django-admin.py startproject mysite</code> 。</li>
+<li>cd mysite，运行命令 <code>python manage.py runserver</code> ，也可以指定端口 <code>python manage.py runserver 0.0.0.0:8000</code> 。</li>
+<li>访问 http://127.0.0.1:8000/，看Django是否启动。</li>
+</ol>
+
+
+<h2>视图和URL配置</h2>
+
+<h3>静态页面请求处理过程</h3>
+
+<ol>
+<li>进来的请求转/hello/</li>
+<li>Django通过在ROOT_URLCONF配置来决定根URLconf</li>
+<li>Django在URLconf的所有URL模式中，查找第一个匹配/hello/的条目</li>
+<li>如果找到匹配，将调用相应的视图函数</li>
+<li>视图函数返回一个HttpResponse</li>
+<li>Django转换HttpResponse为一个适合的HTTP response，以web page显示出来</li>
+</ol>
+
+
+<h2>模板系统</h2>
+
+<h3>名词</h3>
+
+<p><strong>变量</strong>：两个大括号包围，<code>{{person_name}}</code><br/>
+<strong>标签</strong>：大括号和百分号包围，<code>{% if ordered_warranty %}</code> <br/>
+<strong>过滤器</strong>：用（|）来调用，<code>{{ship_date|date:"Fj,Y"}}</code>  <br/>
+标签和过滤器的列表，见附录F，可以用其创建自己的tag和filters。</p>
+
+<h3>如何使用模板</h3>
+
+<p>1.创建模板对象，就是将模板的代码或者html文件变成Template</p>
+
+<pre><code>from django.template import Template
+t = Template('Your name is {{ name }}.')
+</code></pre>
+
+<p>2.渲染模板，就是将模板中的变量用Context对象中的变量替换</p>
+
+<pre><code>form diango.template import Context
+t.render(Context({'name':'john'}))
+</code></pre>
+
+<h3>常用模板标签</h3>
+
+<p>1.<code>{%if%}</code> ，标签需要成对出现，可以嵌套，<code>{%else%}</code>可选。</p>
+
+<pre><code>{% if athlete_list %}
+    ……
+{% else %}
+    …… 
+{% endif %}
+</code></pre>
+
+<p><code>{%ifequal%} 和 {%ifnotequal%}</code>，用来比较变量</p>
+
+<pre><code>{% ifequal section 'sitenews' %} 
+    &lt;h1&gt;Site News&lt;/h1&gt;
+{% else %}
+    &lt;h1&gt;No News Here&lt;/h1&gt;
+{% endifequal %}
+</code></pre>
+
+<p>2.<code>{%for%}</code>，标签需要成对出现，可以嵌套</p>
+
+<pre><code>{% for athlete in athlete_list %}
+    &lt;li&gt;{{ athlete.name }}&lt;/li&gt; 
+{% endfor %}
+</code></pre>
+
+<p>a.增加reversed使列表反向迭代：</p>
+
+<pre><code>{% for athlete in athlete_list reversed %} 
+    ……
+{% endfor %}
+</code></pre>
+
+<p>b.循环之前检测列表大小，列表为空时输出提示：</p>
+
+<pre><code>{% if athlete_list %}
+    {% for athlete in athlete_list %}
+        &lt;p&gt;{{ athlete.name }}&lt;/p&gt; 
+    {% endfor %}
+{% else %}
+    &lt;p&gt;There are no athletes. Only computer programmers.&lt;/p&gt;
+{% endif %}
+</code></pre>
+
+<p>  以上语句等价于使用<code>{%empty%}</code>，如下：</p>
+
+<pre><code>{% for athlete in athlete_list %} 
+    &lt;p&gt;{{ athlete.name }}&lt;/p&gt;
+{% empty %}
+    &lt;p&gt;There are no athletes. Only computer programmers.&lt;/p&gt;
+{% endfor %}
+</code></pre>
+
+<p>  方便的多，请使用<code>{%empty%}</code>。
+c.forloop变量,详见文档。</p>
+
+<p>3.注释</p>
+
+<pre><code>{# This is a comment #}
+</code></pre>
+
+<p>  或者</p>
+
+<pre><code>{% comment %}
+    This is a multiline comment. 
+{% endcomment %}
+</code></pre>
+
+<h3>过滤器</h3>
+
+<p>过滤器使用管道字符，可以套接（一个管道输出作为下一个管道输入），例如查找列表第一个元素并转换为大写：</p>
+
+<pre><code>{{my_list|first|upper}}
+</code></pre>
+
+<p>过滤器可带参数，以双引号包围，例如显示变量bio的前30个词：</p>
+
+<pre><code>{{ bio|truncatewords:"30" }}
+</code></pre>
+
+<p>几个重要过滤器：<br/>
+<code>addslashes</code>:添加反斜杠到任何反斜杠、单引号、双引号之前。这在JavaScript处理中十分有用。<br/>
+<code>date</code>：按指定格式参数化date或datetime对象。<br/>
+<code>length</code>返回变量的长度。</p>
+
+<h3>在视图中使用模板</h3>
+
+<p>1.定位至settings.py配置文件，找到TEMPLATE_DIR，设置模板目录，别忘了<em>逗号</em>。<br/>
+2.使用<code>render_to_response（）</code></p>
+
+<pre><code>from django.shortcuts import render_to_response 
+import datetime
+
+def current_datetime(request):
+    now = datetime.datetime.now()
+    return render_to_response('current_datetime.html', 
+                                {'current_date': now})
+</code></pre>
+
+<p>如果不提供第二个参数，render_to_response()使用一个空字典。<br/>
+3. 使用<code>locals()</code> ，上面的代码可修改为：</p>
+
+<pre><code>def current_datetime(request):
+    current_date = datetime.datetime.now()
+    return render_to_response('current_datetime.html', locals())
+</code></pre>
+
+<p>locals()可以让模板中的变量和代码中的变量相通，locals()记住所有已定义的局部变量。</p>
+
+<h3>模板继承</h3>
+
+<p>{%include%}标签仅仅是引入部分内容</p>
+
+<pre><code>{% include 'includes/nav.html' %}
+</code></pre>
+
+<p>对这部分内容无法修改，比如引入header，对于其中的title就无法修改，而模板继承就可以。要用到<code>{% extends %}</code>标签，基础模板范例（base.html）：</p>
+
+<pre><code>&lt;!DOCTYPE HTML PUBLIC "//W3C//DTD HTML 4.01//EN"&gt; &lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;title&gt;{% block title %}{% endblock %}&lt;/title&gt; &lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;My helpful timestamp site&lt;/h1&gt; 
+    {% block content %}{% endblock %} 
+    {% block footer %}
+    &lt;hr&gt;
+    &lt;p&gt;Thanks for visiting my site.&lt;/p&gt; {% endblock %}
+&lt;/body&gt; 
+&lt;/html&gt;
+</code></pre>
+
+<p>其中<code>{%block%}</code>标签告诉模板引擎可以重载这些部分。<br/>
+使用基础模板（current_datetime.html）：</p>
+
+<pre><code>{% extends "base.html" %}
+{% block title %}The current time{% endblock %}
+{% block content %}
+    &lt;p&gt;It is now {{ current_date }}.&lt;/p&gt; 
+{% endblock %}
+</code></pre>
+
+<p>注意：<br/>
+1.<code>{% extends %}</code>必须为第一个标签。<br/>
+2.基础模板中<code>{% block %}</code>标签越多越好。</p>
+
+<h2>数据模型</h2>
+
+<h3>数据库查询简单方法</h3>
+
+<p>使用MySQLdb类库执行SQL语句查询并处理：</p>
+
+<pre><code>db = MySQLdb.connect(user='me',db='mydb',passwd='secret',host='localhost')
+cursor = db.cursor()
+cursor.execute('SELECT name FROM books ORDER BY name')
+db.close()
+</code></pre>
+
+<h3>数据库配置</h3>
+
+<p>在&#8217;setting.py&#8217;中找到DATABASES设置数据库，注意sqlite和其他数据库的用法不同。</p>
+
+<h3>第一个app</h3>
+
+<p>一个project可以包含很多app，如果使用了Django的数据库层（模型），必须建一个app，模型放在apps中。</p>
+
+<p>假设要建立一个books的app，步骤如下：</p>
+
+<p>1.在<code>manage.py</code>目录下，建app目录：</p>
+
+<pre><code>python manage.py startapp books
+</code></pre>
+
+<p>2.修改<code>models.py</code>，设计数据库表结构,注意添加<code>__unicode__</code>函数：</p>
+
+<pre><code>from django.db import models
+
+class Publisher(models.Model):
+    name = models.CharField(max_length=30)
+    address = models.CharField(max_length=50)
+    city = models.CharField(max_length=60)
+    state_province = models.CharField(max_length=30)
+    country = models.CharField(max_length=50)
+    website = models.URLField()        
+    def __unicode__(self):
+        return self.name
+
+class Author(models.Model):
+    first_name = models.CharField(max_length=30) 
+    last_name = models.CharField(max_length=40)
+    email = models.EmailField()
+    def __unicode__(self):
+        return self.first_name
+
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    authors = models.ManyToManyField(Author)
+    publisher = models.ForeignKey(Publisher)
+    publication_date = models.DateField()
+    def __unicode__(self):
+        return self.first_name
+</code></pre>
+
+<p>3.安装数据模型，在<code>setting.py</code>的<code>INSTALLED_APPS</code>最后添加books：</p>
+
+<pre><code>INSTALLED_APPS = (
+ 'books',
+)
+</code></pre>
+
+<p>4.验证数据模型的有效性：</p>
+
+<pre><code>python manage.py validate
+</code></pre>
+
+<p>5.根据<code>models.py</code>中的描述生成创建表的sql语句：</p>
+
+<pre><code>python manage.py sqlall books
+</code></pre>
+
+<p>6.使用5中生成的语句创建表：</p>
+
+<pre><code>python manage.py syncdb
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[回文数和利克瑞尔数]]></title>
@@ -82,7 +362,7 @@
 </span><span class='line'>  <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span>
 </span><span class='line'>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)):</span>
 </span><span class='line'>      <span class="n">r</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="n">l</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>        
-</span><span class='line'>  <span class="k">return</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">r</span>
 </span><span class='line'>
 </span><span class='line'><span class="k">def</span> <span class="nf">num_to_list</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 </span><span class='line'>  <span class="sd">&#39;&#39;&#39;将一个数从个位开始放入一个列表&#39;&#39;&#39;</span>

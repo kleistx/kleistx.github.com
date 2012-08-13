@@ -2,38 +2,42 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://kleistx.github.com/blog/jiu-ri-du-shu-shi-guang/</loc>
-        <lastmod>2012-08-09T00:31:23+08:00</lastmod>
+        <lastmod>2012-08-11T01:33:26+08:00</lastmod>
     </url>
     <url>
         <loc>http://kleistx.github.com/blog/macchang-yong-di-san-fang-ruan-jian-tui-jian/</loc>
-        <lastmod>2012-08-09T00:31:23+08:00</lastmod>
+        <lastmod>2012-08-11T01:33:26+08:00</lastmod>
     </url>
     <url>
         <loc>http://kleistx.github.com/blog/octopresszhe-teng-ji/</loc>
-        <lastmod>2012-08-09T00:31:23+08:00</lastmod>
+        <lastmod>2012-08-11T01:33:26+08:00</lastmod>
     </url>
     <url>
         <loc>http://kleistx.github.com/blog/dive-into-python-notes-1/</loc>
-        <lastmod>2012-08-09T00:31:23+08:00</lastmod>
+        <lastmod>2012-08-13T12:27:06+08:00</lastmod>
     </url>
     <url>
         <loc>http://kleistx.github.com/blog/zai-macshang-shi-yong-mysqldb/</loc>
-        <lastmod>2012-08-09T00:31:23+08:00</lastmod>
+        <lastmod>2012-08-11T01:33:26+08:00</lastmod>
     </url>
     <url>
         <loc>http://kleistx.github.com/blog/lychrelnumber/</loc>
-        <lastmod>2012-08-09T01:04:41+08:00</lastmod>
+        <lastmod>2012-08-13T11:03:45+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://kleistx.github.com/blog/the-django-book-2-note-1/</loc>
+        <lastmod>2012-08-13T12:32:03+08:00</lastmod>
     </url>
     <url>
         <loc>http://kleistx.github.com/about/</loc>
-        <lastmod>2012-08-09T00:31:23+08:00</lastmod>
+        <lastmod>2012-08-11T01:33:26+08:00</lastmod>
     </url>
     <url>
         <loc>http://kleistx.github.com/blog/archives/</loc>
-        <lastmod>2012-08-09T01:04:41+08:00</lastmod>
+        <lastmod>2012-08-13T12:32:03+08:00</lastmod>
     </url>
     <url>
         <loc>http://kleistx.github.com/</loc>
-        <lastmod>2012-08-09T01:04:41+08:00</lastmod>
+        <lastmod>2012-08-13T12:32:03+08:00</lastmod>
     </url>
 </urlset>

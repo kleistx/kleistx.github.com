@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | Xway]]></title>
   <link href="http://kleistx.github.com/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://kleistx.github.com/"/>
-  <updated>2012-08-09T01:05:06+08:00</updated>
+  <updated>2012-08-13T12:33:20+08:00</updated>
   <id>http://kleistx.github.com/</id>
   <author>
     <name><![CDATA[xway]]></name>
@@ -12,6 +12,286 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Django Book 2 ：Notes 1]]></title>
+    <link href="http://kleistx.github.com/blog/the-django-book-2-note-1/"/>
+    <updated>2012-08-13T11:11:00+08:00</updated>
+    <id>http://kleistx.github.com/blog/the-django-book-2-note-1</id>
+    <content type="html"><![CDATA[<h2>入门</h2>
+
+<ol>
+<li>先安装好python和mysql等。</li>
+<li>下载django，运行命令 <code>python setup.py install</code> 安装之。</li>
+<li>选择好安装目录，进入，运行命令 <code>django-admin.py startproject mysite</code> 。</li>
+<li>cd mysite，运行命令 <code>python manage.py runserver</code> ，也可以指定端口 <code>python manage.py runserver 0.0.0.0:8000</code> 。</li>
+<li>访问 http://127.0.0.1:8000/，看Django是否启动。</li>
+</ol>
+
+
+<h2>视图和URL配置</h2>
+
+<h3>静态页面请求处理过程</h3>
+
+<ol>
+<li>进来的请求转/hello/</li>
+<li>Django通过在ROOT_URLCONF配置来决定根URLconf</li>
+<li>Django在URLconf的所有URL模式中，查找第一个匹配/hello/的条目</li>
+<li>如果找到匹配，将调用相应的视图函数</li>
+<li>视图函数返回一个HttpResponse</li>
+<li>Django转换HttpResponse为一个适合的HTTP response，以web page显示出来</li>
+</ol>
+
+
+<h2>模板系统</h2>
+
+<h3>名词</h3>
+
+<p><strong>变量</strong>：两个大括号包围，<code>{{person_name}}</code><br/>
+<strong>标签</strong>：大括号和百分号包围，<code>{% if ordered_warranty %}</code> <br/>
+<strong>过滤器</strong>：用（|）来调用，<code>{{ship_date|date:"Fj,Y"}}</code>  <br/>
+标签和过滤器的列表，见附录F，可以用其创建自己的tag和filters。</p>
+
+<h3>如何使用模板</h3>
+
+<p>1.创建模板对象，就是将模板的代码或者html文件变成Template</p>
+
+<pre><code>from django.template import Template
+t = Template('Your name is {{ name }}.')
+</code></pre>
+
+<p>2.渲染模板，就是将模板中的变量用Context对象中的变量替换</p>
+
+<pre><code>form diango.template import Context
+t.render(Context({'name':'john'}))
+</code></pre>
+
+<h3>常用模板标签</h3>
+
+<p>1.<code>{%if%}</code> ，标签需要成对出现，可以嵌套，<code>{%else%}</code>可选。</p>
+
+<pre><code>{% if athlete_list %}
+    ……
+{% else %}
+    …… 
+{% endif %}
+</code></pre>
+
+<p><code>{%ifequal%} 和 {%ifnotequal%}</code>，用来比较变量</p>
+
+<pre><code>{% ifequal section 'sitenews' %} 
+    &lt;h1&gt;Site News&lt;/h1&gt;
+{% else %}
+    &lt;h1&gt;No News Here&lt;/h1&gt;
+{% endifequal %}
+</code></pre>
+
+<p>2.<code>{%for%}</code>，标签需要成对出现，可以嵌套</p>
+
+<pre><code>{% for athlete in athlete_list %}
+    &lt;li&gt;{{ athlete.name }}&lt;/li&gt; 
+{% endfor %}
+</code></pre>
+
+<p>a.增加reversed使列表反向迭代：</p>
+
+<pre><code>{% for athlete in athlete_list reversed %} 
+    ……
+{% endfor %}
+</code></pre>
+
+<p>b.循环之前检测列表大小，列表为空时输出提示：</p>
+
+<pre><code>{% if athlete_list %}
+    {% for athlete in athlete_list %}
+        &lt;p&gt;{{ athlete.name }}&lt;/p&gt; 
+    {% endfor %}
+{% else %}
+    &lt;p&gt;There are no athletes. Only computer programmers.&lt;/p&gt;
+{% endif %}
+</code></pre>
+
+<p>  以上语句等价于使用<code>{%empty%}</code>，如下：</p>
+
+<pre><code>{% for athlete in athlete_list %} 
+    &lt;p&gt;{{ athlete.name }}&lt;/p&gt;
+{% empty %}
+    &lt;p&gt;There are no athletes. Only computer programmers.&lt;/p&gt;
+{% endfor %}
+</code></pre>
+
+<p>  方便的多，请使用<code>{%empty%}</code>。
+c.forloop变量,详见文档。</p>
+
+<p>3.注释</p>
+
+<pre><code>{# This is a comment #}
+</code></pre>
+
+<p>  或者</p>
+
+<pre><code>{% comment %}
+    This is a multiline comment. 
+{% endcomment %}
+</code></pre>
+
+<h3>过滤器</h3>
+
+<p>过滤器使用管道字符，可以套接（一个管道输出作为下一个管道输入），例如查找列表第一个元素并转换为大写：</p>
+
+<pre><code>{{my_list|first|upper}}
+</code></pre>
+
+<p>过滤器可带参数，以双引号包围，例如显示变量bio的前30个词：</p>
+
+<pre><code>{{ bio|truncatewords:"30" }}
+</code></pre>
+
+<p>几个重要过滤器：<br/>
+<code>addslashes</code>:添加反斜杠到任何反斜杠、单引号、双引号之前。这在JavaScript处理中十分有用。<br/>
+<code>date</code>：按指定格式参数化date或datetime对象。<br/>
+<code>length</code>返回变量的长度。</p>
+
+<h3>在视图中使用模板</h3>
+
+<p>1.定位至settings.py配置文件，找到TEMPLATE_DIR，设置模板目录，别忘了<em>逗号</em>。<br/>
+2.使用<code>render_to_response（）</code></p>
+
+<pre><code>from django.shortcuts import render_to_response 
+import datetime
+
+def current_datetime(request):
+    now = datetime.datetime.now()
+    return render_to_response('current_datetime.html', 
+                                {'current_date': now})
+</code></pre>
+
+<p>如果不提供第二个参数，render_to_response()使用一个空字典。<br/>
+3. 使用<code>locals()</code> ，上面的代码可修改为：</p>
+
+<pre><code>def current_datetime(request):
+    current_date = datetime.datetime.now()
+    return render_to_response('current_datetime.html', locals())
+</code></pre>
+
+<p>locals()可以让模板中的变量和代码中的变量相通，locals()记住所有已定义的局部变量。</p>
+
+<h3>模板继承</h3>
+
+<p>{%include%}标签仅仅是引入部分内容</p>
+
+<pre><code>{% include 'includes/nav.html' %}
+</code></pre>
+
+<p>对这部分内容无法修改，比如引入header，对于其中的title就无法修改，而模板继承就可以。要用到<code>{% extends %}</code>标签，基础模板范例（base.html）：</p>
+
+<pre><code>&lt;!DOCTYPE HTML PUBLIC "//W3C//DTD HTML 4.01//EN"&gt; &lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;title&gt;{% block title %}{% endblock %}&lt;/title&gt; &lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;My helpful timestamp site&lt;/h1&gt; 
+    {% block content %}{% endblock %} 
+    {% block footer %}
+    &lt;hr&gt;
+    &lt;p&gt;Thanks for visiting my site.&lt;/p&gt; {% endblock %}
+&lt;/body&gt; 
+&lt;/html&gt;
+</code></pre>
+
+<p>其中<code>{%block%}</code>标签告诉模板引擎可以重载这些部分。<br/>
+使用基础模板（current_datetime.html）：</p>
+
+<pre><code>{% extends "base.html" %}
+{% block title %}The current time{% endblock %}
+{% block content %}
+    &lt;p&gt;It is now {{ current_date }}.&lt;/p&gt; 
+{% endblock %}
+</code></pre>
+
+<p>注意：<br/>
+1.<code>{% extends %}</code>必须为第一个标签。<br/>
+2.基础模板中<code>{% block %}</code>标签越多越好。</p>
+
+<h2>数据模型</h2>
+
+<h3>数据库查询简单方法</h3>
+
+<p>使用MySQLdb类库执行SQL语句查询并处理：</p>
+
+<pre><code>db = MySQLdb.connect(user='me',db='mydb',passwd='secret',host='localhost')
+cursor = db.cursor()
+cursor.execute('SELECT name FROM books ORDER BY name')
+db.close()
+</code></pre>
+
+<h3>数据库配置</h3>
+
+<p>在'setting.py'中找到DATABASES设置数据库，注意sqlite和其他数据库的用法不同。</p>
+
+<h3>第一个app</h3>
+
+<p>一个project可以包含很多app，如果使用了Django的数据库层（模型），必须建一个app，模型放在apps中。</p>
+
+<p>假设要建立一个books的app，步骤如下：</p>
+
+<p>1.在<code>manage.py</code>目录下，建app目录：</p>
+
+<pre><code>python manage.py startapp books
+</code></pre>
+
+<p>2.修改<code>models.py</code>，设计数据库表结构,注意添加<code>__unicode__</code>函数：</p>
+
+<pre><code>from django.db import models
+
+class Publisher(models.Model):
+    name = models.CharField(max_length=30)
+    address = models.CharField(max_length=50)
+    city = models.CharField(max_length=60)
+    state_province = models.CharField(max_length=30)
+    country = models.CharField(max_length=50)
+    website = models.URLField()        
+    def __unicode__(self):
+        return self.name
+
+class Author(models.Model):
+    first_name = models.CharField(max_length=30) 
+    last_name = models.CharField(max_length=40)
+    email = models.EmailField()
+    def __unicode__(self):
+        return self.first_name
+
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    authors = models.ManyToManyField(Author)
+    publisher = models.ForeignKey(Publisher)
+    publication_date = models.DateField()
+    def __unicode__(self):
+        return self.first_name
+</code></pre>
+
+<p>3.安装数据模型，在<code>setting.py</code>的<code>INSTALLED_APPS</code>最后添加books：</p>
+
+<pre><code>INSTALLED_APPS = (
+ 'books',
+)
+</code></pre>
+
+<p>4.验证数据模型的有效性：</p>
+
+<pre><code>python manage.py validate
+</code></pre>
+
+<p>5.根据<code>models.py</code>中的描述生成创建表的sql语句：</p>
+
+<pre><code>python manage.py sqlall books
+</code></pre>
+
+<p>6.使用5中生成的语句创建表：</p>
+
+<pre><code>python manage.py syncdb
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[回文数和利克瑞尔数]]></title>
@@ -29,93 +309,51 @@
 利克瑞尔数实际上很罕见，而且难以证明，90%的10000以内的数经过不多于7次迭代后会变成回文数，
 唯一例外的是196，至今还未被迭代成回文数，也许它就是最小的利克瑞尔数。<br/>
 科普完毕，下面写个小程序来验证利克瑞尔数：
-<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">Lychrel_Number</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">counter</span><span class="p">):</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="s">&#39;&#39;&#39;验证一个数是否为利克瑞尔数&#39;&#39;&#39;</span>
-</span><span class='line'><span class="nb">sum</span> <span class="o">=</span> <span class="n">num</span> <span class="o">+</span> <span class="n">reverse_num</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
-</span><span class='line'><span class="k">print</span> <span class="s">&#39;</span><span class="si">%d</span><span class="s">+</span><span class="si">%d</span><span class="s">=</span><span class="si">%d</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">reverse_num</span><span class="p">(</span><span class="n">num</span><span class="p">),</span><span class="nb">sum</span><span class="p">)</span>
-</span><span class='line'><span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span>    <span class="c">#迭代计数</span>
-</span><span class='line'><span class="k">if</span> <span class="n">is_palindrome</span><span class="p">(</span><span class="nb">sum</span><span class="p">):</span>
-</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%d</span><span class="s"> times!&#39;</span><span class="o">%</span><span class="n">counter</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">return</span>
-</span><span class='line'><span class="k">else</span><span class="p">:</span>
-</span><span class='line'>    <span class="n">Lychrel_Number</span><span class="p">(</span><span class="nb">sum</span><span class="p">,</span><span class="n">counter</span><span class="p">)</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">def</span> <span class="nf">reverse_num</span><span class="p">(</span><span class="n">n</span><span class="p">):</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="s">&#39;&#39;&#39;将一个数翻转&#39;&#39;&#39;</span>
-</span><span class='line'><span class="n">l</span> <span class="o">=</span> <span class="n">num_to_list</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-</span><span class='line'><span class="n">r</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)):</span>
-</span><span class='line'>    <span class="n">r</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="n">l</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
-</span><span class='line'><span class="k">return</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">def</span> <span class="nf">num_to_list</span><span class="p">(</span><span class="n">n</span><span class="p">):</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="s">&#39;&#39;&#39;将一个数从个位开始放入一个列表&#39;&#39;&#39;</span>
-</span><span class='line'><span class="n">l</span><span class="o">=</span><span class="p">[]</span>
-</span><span class='line'><span class="k">while</span> <span class="n">n</span><span class="p">:</span>
-</span><span class='line'>    <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="o">%</span><span class="mi">10</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">/</span><span class="mi">10</span>
-</span><span class='line'><span class="k">return</span> <span class="n">l</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">def</span> <span class="nf">is_palindrome</span><span class="p">(</span><span class="n">n</span><span class="p">):</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="s">&#39;&#39;&#39;判断回文数&#39;&#39;&#39;</span>
-</span><span class='line'><span class="n">original</span> <span class="o">=</span> <span class="n">num_to_list</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-</span><span class='line'><span class="n">result</span> <span class="o">=</span> <span class="n">original</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>     <span class="c">#翻转序列</span>
-</span><span class='line'><span class="k">return</span> <span class="n">original</span> <span class="o">==</span> <span class="n">result</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">num</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;please enter a number:&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="n">Lychrel_Number</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+{% codeblock lang:python %}
+def Lychrel_Number(num,counter):</p>
+
+<pre><code>'''验证一个数是否为利克瑞尔数'''
+sum = num + reverse_num(num)
+print '%d+%d=%d'%(num,reverse_num(num),sum)
+counter = counter + 1    #迭代计数
+if is_palindrome(sum):
+    print('%d times!'%counter)
+    return
+else:
+    Lychrel_Number(sum,counter) 
+</code></pre>
+
+<p>def reverse_num(n):</p>
+
+<pre><code>'''将一个数翻转'''
+l = num_to_list(n)          
+r = 0
+for i in range(len(l)):
+    r = r + l.pop()*pow(10,i)       
+return r
+</code></pre>
+
+<p>def num_to_list(n):</p>
+
+<pre><code>'''将一个数从个位开始放入一个列表'''
+l=[]
+while n:
+    l.append(n%10)
+    n = n/10
+return l
+</code></pre>
+
+<p>def is_palindrome(n):</p>
+
+<pre><code>'''判断回文数'''
+original = num_to_list(n)
+result = original[::-1]     #翻转序列
+return original == result
+</code></pre>
+
+<p>num = input("please enter a number:")
+Lychrel_Number(num,0)
+{% endcodeblock %}</p>
 
 <p>运行示例如下：</p>
 
@@ -192,6 +430,239 @@ sudo rm -rf /var/db/receipts/com.mysql.*
 </code></pre>
 
 <p>看起来很简单，可是浪费了我整个下午。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Dive Into Python 3 ：Notes 1]]></title>
+    <link href="http://kleistx.github.com/blog/dive-into-python-notes-1/"/>
+    <updated>2012-05-29T22:25:00+08:00</updated>
+    <id>http://kleistx.github.com/blog/dive-into-python-notes-1</id>
+    <content type="html"><![CDATA[<p>以下是我最近阅读<a href="http://woodpecker.org.cn/diveintopython3/table-of-contents.html#your-first-python-program">《深入python3》</a>后记的笔记。</p>
+
+<h2>第一份Python程序</h2>
+
+<h3>条件表达式</h3>
+
+<p>C语言中的条件表达式是这样 <code>x = condition ? true_value : false_value</code><br/>
+python中是这样 <code>x = true_value if condition else false_value</code>，例如：</p>
+
+<pre><code>X = true if logging else flase
+</code></pre>
+
+<h3>文档字符串docstring</h3>
+
+<p>紧跟在函数声明的下一行，用引号或三重引号包围，描述函数必备，在有些ide，当用鼠标指向函数名时，其docstring以tooltip的方式显示出来，很便利。<br/>
+<a href="http://www.python.org/dev/peps/pep-0257/">PEP 257: Docstring</a> 约定解释了用什么来从大量的 docstring 中分辨出一个好的 docstring。</p>
+
+<h3>异常</h3>
+
+<p>在被调用程序中使用 raise 语句来抛出异常，在调用程序中使用 try...except 块来处理异常。</p>
+
+<h3><code>__name__</code> 和 <code>__main__</code></h3>
+
+<pre><code>if __name__ == '__main__'
+</code></pre>
+
+<p>这种写法的原理：模块是对象，所有的模块对象都有一个内置的属性 <code>__name__</code> ,如果import这个模块，那么<code>__name__</code>就等于这个模块的文件名（不包含路径和扩展名），但如果将此模块当做一个独立的程序来运行的话，<code>__name__</code> 将是一个特殊的默认值<code>__main__</code>，所以才用此if语句来判断。</p>
+
+<h2>内置数据类型</h2>
+
+<p>八大内置数据类型，booleans，numbers，strings，bytes，lists，tuples，sets，dictionaries。</p>
+
+<p>用 type() 函数来检测任何值或变量的类型。<br/>
+用 isinstance() 函数判断某个值或变量是否为给定某个类型。如：</p>
+
+<pre><code>isinstance(1, int)
+</code></pre>
+
+<h3>常见数值运算</h3>
+
+<p>其他的都和c语言差不多，除了这两个： <code>//</code>除后取整 ； <code>**</code>求幂运算 ；</p>
+
+<h3>列表<code>[ ]</code></h3>
+
+<ul>
+<li>列表用 <code>[ ]</code> 来定义。</li>
+<li>可用<code>list[-1]</code>来从反方向索引。</li>
+<li>布尔上下文，空列表为false，有元素的列表为true。</li>
+</ul>
+
+
+<p>切片几种用法</p>
+
+<pre><code>list[1:3] ; list[1:-1]; list[0:3]; list[:3]; list[3:]; list[:]      
+</code></pre>
+
+<p> list[:]是一个新列表，与list并不一样，只是拥有完全相同的元素，是对列表进行复制的一条捷径。</p>
+
+<ul>
+<li>增加元素
+
+<ul>
+<li>+号，<code>list+[2.0,3]</code>，此方法效率较低。</li>
+<li>append()，<code>list.append(5)</code>，append只能添加一个元素。</li>
+<li>insert()，<code>list.insert(2,'j')</code>，insert需要一个索引位置。</li>
+<li>expend()，<code>list.extend(['four', 'Ω'])</code>，参数是列表，主要用于合并列表。</li>
+</ul>
+</li>
+<li>删除元素
+
+<ul>
+<li>del，直接 <code>del list[1]</code> ，命令行用法。</li>
+<li>remove()，<code>list.remove(item)</code> ，删除item的第一次出现。</li>
+<li>pop(), <code>list.pop()</code> 删除最后的元素，<code>list.pop(2)</code>删除该索引位置的元素，此方法返回被pop的值。</li>
+</ul>
+</li>
+<li>检索
+
+<ul>
+<li>count()，<code>list.count(item)</code> 返回item出现的次数。</li>
+<li>in，<code>if x in list</code> 返回布尔值。</li>
+<li>index()，<code>list.index(item)</code> 返回item的索引值。</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>元组<code>( )</code></h3>
+
+<p>以下是与list的相同点：</p>
+
+<ul>
+<li>元组用<code>（ ）</code>来定义，可以用<code>[ ]</code>来索引。</li>
+<li>负索引同于列表。</li>
+<li>布尔上下文同于列表。</li>
+<li>切片同于列表。</li>
+<li>索引，也可用count(),in,index()。</li>
+</ul>
+
+
+<p>以下是与list的不同点：</p>
+
+<ul>
+<li>创建单元素元组，须如此<code>（“a”，）</code>，加上逗号，python才认元组，否则认为括号多余。</li>
+<li>元组不可修改，故无增加删除之方法。</li>
+</ul>
+
+
+<p><strong>元组的优点：</strong></p>
+
+<p>可同时赋多个值</p>
+
+<pre><code>v=('a',2,true)
+(x,y,z) = v
+</code></pre>
+
+<p> 有多种用途，例如：</p>
+
+<pre><code>(MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY)=range(7)
+</code></pre>
+
+<p>或者让函数返回元组，赋值给不同的变量。
+* 进行遍历操作比列表快。
+* “写保护”，让代码更安全。
+*  可用作字典键，列表不行。
+*  与列表可以相互转换，<code>tuple()</code>冻结列表，<code>list()</code>融合元组。</p>
+
+<h3>集合<code>{ }</code></h3>
+
+<ul>
+<li>集合用 <code>{ }</code> 来定义，用此方法定义时，至少含一个元素，纯<code>{ }</code>是表示空字典。</li>
+<li>创建空集合，用不带参数的<code>set()</code>，如 <code>a_set = set()</code> 不能用 <code>a_set = { }</code> 。</li>
+<li>可用列表创建集合，如 <code>a_set = set(list)</code> 初始化。</li>
+<li>集合装载唯一值，所以会自动消除重复元素。</li>
+<li>增加元素
+
+<ul>
+<li>add()，增加单值，<code>a_set.add(11)</code>。</li>
+<li>udate()，增加一个序列，list或者tuple，<code>a_set.update([10,30,59])</code>。</li>
+</ul>
+</li>
+<li>删除元素
+
+<ul>
+<li>discard() ，删除单值，<code>a_set.discard(10)</code> ，若值不存在，无反应。</li>
+<li>remove()，删除单值， <code>a_set.remove(21)</code>，若值不存在，抛出错误。</li>
+<li>pop()，弹出单值并返回该值，是随机弹出。</li>
+<li>clear()，清空集合。</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>字典<code>{ }</code></h3>
+
+<ul>
+<li>集合装载唯一值，所以会自动消除重复元素。</li>
+</ul>
+
+
+<p>同一字典的值可以装入不同数据类型和任何对象，但是键只能是数据类型，如：</p>
+
+<pre><code>{1000: ['KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+ 1024: ['KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']}
+</code></pre>
+
+<ul>
+<li>可以使用<code>len()</code>和<code>in</code>。</li>
+<li>可以使用类似集合的增加和减少元素的方法。</li>
+</ul>
+
+
+<h2>推导式</h2>
+
+<p>紧凑，直观，有点像sql语句。</p>
+
+<h3>列表推导式</h3>
+
+<p>对某列表中每个元素应用一个函数，将其映射到另一个列表。<br/>
+将a_list中的元素乘以3</p>
+
+<pre><code>[elem * 3 for elem in a_list]
+</code></pre>
+
+<p>将当前目录下所有xml文件加上全路径</p>
+
+<pre><code>[os.path.realpath(f) for f in glob.glob('*.xml')]  
+</code></pre>
+
+<p>过滤列表，返回当前目录下所有大小大于6000字节的py文件</p>
+
+<pre><code>[f for f in glob.glob('*.py') if os.stat(f).st_size &gt; 6000]
+</code></pre>
+
+<p>返回元组列表，每个元组包含文件字节数和绝对路径</p>
+
+<pre><code>[(os.stat(f).st_size, os.path.realpath(f)) for f in glob.glob('*.xml')] 
+</code></pre>
+
+<h3>字典推导式</h3>
+
+<p>与列表推导式不同之处有两点：<br/>
+1.被花括号包围而非方括号。 <br/>
+2.对于每个元素它包含由冒号分隔的两个表达式。冒号前为键，其后为值。</p>
+
+<pre><code>{f:os.stat(f) for f in glob.glob('*.py')}
+</code></pre>
+
+<p>也可以加上if形成过滤字典</p>
+
+<pre><code>{os.path.splitext(f)[0]:humansize.approximate_size(meta.st_size) \ 
+     for f, meta in metadata_dict.items() if meta.st_size &gt; 6000} 
+</code></pre>
+
+<p>小技巧，交换字典的键和值</p>
+
+<pre><code>{value:key for key, value in a_dict.items()}
+</code></pre>
+
+<h3>集合推导式</h3>
+
+<p>与列表推导式和字典推导式类似，其输入不一定是集合，可以是任何序列：</p>
+
+<pre><code> {2**x for x in range(10)} 
+</code></pre>
 ]]></content>
   </entry>
   
