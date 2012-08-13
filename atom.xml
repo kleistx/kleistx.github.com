@@ -4,7 +4,7 @@
   <title><![CDATA[Xway]]></title>
   <link href="http://kleistx.github.com/atom.xml" rel="self"/>
   <link href="http://kleistx.github.com/"/>
-  <updated>2012-08-13T21:08:16+08:00</updated>
+  <updated>2012-08-13T21:11:26+08:00</updated>
   <id>http://kleistx.github.com/</id>
   <author>
     <name><![CDATA[xway]]></name>
@@ -52,7 +52,7 @@ from /Users/toutakashi/.rvm/gems/ruby-1.9.3-p194/bin/ruby_noexec_wrapper:14:in `
 <pre><code>/Users/toutakashi/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/psych.rb:203:in `parse': (&lt;unknown&gt;): did not find expected key while parsing a block mapping at line 2 column 1 (Psych::SyntaxError)
 </code></pre>
 
-<p>一个<unknown>让你欲哭无泪。我碰上这个错误时，恰好是在更新octopress之后，为此重装了octopress，重装了不同版本的ruby，其间发现由于我的新系统lion不带gcc，无法编译ruby，又折腾半天发现得给xcode安个command tools，但即使这样还是没有改善，最后偶然的发现原因是最近的一片文章中categories格式错了，本来应该是<code>categories: [python,notes]</code>，我不小心给写成了<code>categories: [python],[notes]</code>，于是悲剧了。</p>
+<p>一个<code>&lt;unknown&gt;</code>让你欲哭无泪。我碰上这个错误时，恰好是在更新octopress之后，于是怀疑面很广，为此重装了octopress，重装了不同版本的ruby，其间发现由于我的新系统lion不带gcc，无法编译ruby，又折腾半天发现得给xcode安个command tools，但即使这样还是没有改善，最后偶然的发现原因是最近的一片文章中categories格式错了，本来应该是<code>categories: [python,notes]</code>，我不小心给写成了<code>categories: [python],[notes]</code>，于是悲剧了。</p>
 
 <h3>sass更新的问题</h3>
 
