@@ -3,7 +3,7 @@ layout: post
 title: "Dive Into Python 3 ：Notes 1"
 date: 2012-05-29 22:25
 comments: true
-categories: notes
+categories: [python,notes]
 ---
 以下是我最近阅读[《深入python3》](http://woodpecker.org.cn/diveintopython3/table-of-contents.html#your-first-python-program)后记的笔记。
 

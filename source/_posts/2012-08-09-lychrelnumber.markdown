@@ -32,7 +32,7 @@ def reverse_num(n):
 	r = 0
 	for i in range(len(l)):
 		r = r + l.pop()*pow(10,i)    	
-	return(r)
+	return r
 
 def num_to_list(n):
 	'''将一个数从个位开始放入一个列表'''
