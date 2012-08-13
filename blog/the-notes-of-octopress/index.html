@@ -5,14 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Mac常用第三方软件推荐 - Xway</title>
+  <title>使用octopress中的故障记录 - Xway</title>
   <meta name="author" content="xway">
 
   
-  <meta name="description" content="编程工具 xcode：mac下编译软件必备。
-python：我最喜欢的编程利器。
-pip：方便安装第三方python包。 ruby：和python一样是语言中的战斗机。 homebrew：依赖ruby，方便安装卸载很多编程工具。 iterm2：增强终端。
-github for mac： &hellip;">
+  <meta name="description" content="使用octopress已有半年了，到目前为止感觉不坏，相比国内的博客平台，最大的好处是不用担心若干莫名其妙的敏感词导致文章不能发布，而且它确实是个时尚玩具，和ruby，github，sass都扯上了关系，满足了我这个伪程序员一点虚荣心，不过这类玩意儿就像快刀，好用是好用，一不小心就划伤手指。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +18,7 @@ github for mac： &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://kleistx.github.com/blog/macchang-yong-di-san-fang-ruan-jian-tui-jian/">
+  <link rel="canonical" href="http://kleistx.github.com/blog/the-notes-of-octopress/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -84,7 +81,7 @@ github for mac： &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Mac常用第三方软件推荐</h1>
+      <h1 class="entry-title">使用octopress中的故障记录</h1>
     
     
       <p class="meta">
@@ -100,7 +97,7 @@ github for mac： &hellip;">
   
 
 
-<time datetime="2012-05-12T23:45:00+08:00" pubdate data-updated="true">May 12<span>th</span>, 2012</time>
+<time datetime="2012-08-13T20:11:00+08:00" pubdate data-updated="true">Aug 13<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -109,103 +106,51 @@ github for mac： &hellip;">
   </header>
 
 
-<div class="entry-content"><h3>编程工具</h3>
+<div class="entry-content"><p>使用octopress已有半年了，到目前为止感觉不坏，相比国内的博客平台，最大的好处是不用担心若干莫名其妙的敏感词导致文章不能发布，而且它确实是个时尚玩具，和ruby，github，sass都扯上了关系，满足了我这个伪程序员一点虚荣心，不过这类玩意儿就像快刀，好用是好用，一不小心就划伤手指。</p>
 
-<p>xcode：mac下编译软件必备。<br/>
-python：我最喜欢的编程利器。<br/>
-pip：方便安装第三方python包。  <br/>
-ruby：和python一样是语言中的战斗机。  <br/>
-homebrew：依赖ruby，方便安装卸载很多编程工具。  <br/>
-iterm2：增强终端。<br/>
-github for mac：github官方出品的git客户端。  <br/>
-color Exploer：取色器。 <br/>
-go2shell：在finder中打开终端并转入当前目录。  <br/>
-snippets：代码片段收集工具。<br/>
-navicat for mysql lite：老牌数据库管理工具。</p>
+<p>言归正传，记载几个我使用过程中遇到过的问题，解决方案说来不值一提，但是寻找此方案时那是相当的耗时，因为大部分情况下，你看到的出错提示很相似，根本不可能正确指示出问题在哪儿。</p>
 
-<h3>浏览器</h3>
+<h3>最常见的故障显示</h3>
 
-<p>chrome：有诸多插件。</p>
+<p>在rake generate时出错提示如下：</p>
 
-<h3>中文输入法</h3>
+<pre><code>/Users/toutakashi/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/psych.rb:203:in `parse': (/Users/toutakashi/xway/octopress/_config.yml): could not find expected ': while scanning a simple key at line 8 column 1 (Psych::SyntaxError)
+from /Users/toutakashi/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/psych.rb:203:in `parse_stream'
+from /Users/toutakashi/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/psych.rb:151:in `parse'
+from /Users/toutakashi/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/psych.rb:127:in `load'
+from /Users/toutakashi/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/psych.rb:297:in `block in load_file'
+from /Users/toutakashi/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/psych.rb:297:in `open'
+from /Users/toutakashi/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/psych.rb:297:in `load_file'
+from /Users/toutakashi/.rvm/gems/ruby-1.9.3-p194/gems/jekyll-0.11.0/lib/jekyll.rb:119:in `configuration'
+from /Users/toutakashi/.rvm/gems/ruby-1.9.3-p194/gems/jekyll-0.11.0/bin/jekyll:207:in `&lt;top (required)&gt;'
+from /Users/toutakashi/.rvm/gems/ruby-1.9.3-p194/bin/jekyll:19:in `load'
+from /Users/toutakashi/.rvm/gems/ruby-1.9.3-p194/bin/jekyll:19:in `&lt;main&gt;'
+from /Users/toutakashi/.rvm/gems/ruby-1.9.3-p194/bin/ruby_noexec_wrapper:14:in `eval'
+from /Users/toutakashi/.rvm/gems/ruby-1.9.3-p194/bin/ruby_noexec_wrapper:14:in `&lt;main&gt;'
+</code></pre>
 
-<p>搜狗拼音：相比fit和QQ输入法，这个更适合我。</p>
+<p>别被浩浩荡荡的提示吓着了，怎么看呢，根据我的经验，以from开头的句子都可以忽略，看其他的吧。</p>
 
-<h3>编辑器和IDE</h3>
+<h3>_config.yml中的空格</h3>
 
-<p>textmate：神器一枚，由于dhh的推荐，路人皆知。 <br/>
-sublime text 2:类textmate编辑器，跨平台，支持中文，有取代textmate之势。<br/>
-chocolat：类textmate编辑器，不过现在还是测试版。<br/>
-pycharm：python编程IDE，是目前使用最顺手的一个。   <br/>
-coderunner：编程利器，功能比textmate稍逊，轻便且使用简单。<br/>
-cssedit：编辑css专用。<br/>
-coda 2：编辑html用。<br/>
-mou：使用makedown语法，写文章专用。</p>
+<p>上面这个例子中说在<em>config.yml中找不到某个 <code>“ ： ”</code>， 实际上是，</em>config.yml中各个项的写法是类似<code>simple_search: http://google.com/search</code>，注意冒号后面有个空格，忘掉打空格，就等着报上面的错。</p>
 
-<h3>办公套件</h3>
+<h3>categories中的类别</h3>
 
-<p>iwork09：包括keynote、pages、和numbers。    <br/>
-office 2011：微软的办公套件。</p>
+<p>倘若上面的错误至少还指示了出错的文件和行号，那下面这个完全就是看不明白了：</p>
 
-<h3>效率工具</h3>
+<pre><code>/Users/toutakashi/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/psych.rb:203:in `parse': (&lt;unknown&gt;): did not find expected key while parsing a block mapping at line 2 column 1 (Psych::SyntaxError)
+</code></pre>
 
-<p>evernote：免费版已够用，记录笔记，支持云同步。<br/>
-everbox：类似dropbox，盛大云存储客户端。 <br/>
-google drive：google的云端硬盘。 <br/>
-mind note：思维导图工具。<br/>
-alfred：快速启动工具，类似windows下launchy。</p>
+<p>一个<unknown>让你欲哭无泪。我碰上这个错误时，恰好是在更新octopress之后，为此重装了octopress，重装了不同版本的ruby，其间发现由于我的新系统lion不带gcc，无法编译ruby，又折腾半天发现得给xcode安个command tools，但即使全重装还是没有改善，最后偶然的发现原因是最近的一片文章中categories格式错了，本来应该是<code>categories: [python,notes]</code>，我不小心给写成了<code>categories: [python],[notes]</code>，于是悲剧了。</p>
 
-<h3>阅读器</h3>
+<h3>sass更新的问题</h3>
 
-<p>chmox：阅读chm格式文件。<br/>
-reeder：google reader客户端。    <br/>
-cappuccino：另一个reeder，目前测试中。<br/>
-readlater：收集文章，待有空时慢慢看。 <br/>
-ocrkit：转换扫描版pdf成文字版。</p>
+<p>没事儿最好别急着更新，我在某次跟风更新octopress的源码之后，界面变得乱七八糟，最后发现是sass版本太新的原因，好在这种事情不是我一个人遇到，不久作者的github的页面上就给出了解决方案。</p>
 
-<h3>多媒体</h3>
+<h3>记载</h3>
 
-<p>mplayerx：开源媒体播放器，通杀所有格式。<br/>
-pptv网络电视：在线看电影。<br/>
-vox：音频播放器，短小精悍。<br/>
-diumoo：豆瓣电台客户端。<br/>
-guitar pro：吉他六线谱编辑和播放软件，学吉他必备。    <br/>
-screenflow：录屏软件。</p>
-
-<h3>图形图像</h3>
-
-<p>skitch：简单图片处理，和evernote出自同一公司。<br/>
-picasa：google出品的非常智能的图片库软件。  <br/>
-xee：看图软件。</p>
-
-<h3>虚拟机</h3>
-
-<p>vmware fusion：和windows下的vmware一样出名。</p>
-
-<h3>上传下载工具</h3>
-
-<p>迅雷：比windows下的迅雷简洁的多，支持bt和电驴。  <br/>
-sitesucker：下载整个网站。</p>
-
-<h3>系统工具</h3>
-
-<p>1password：密码管理必备。  <br/>
-cleanmymac：系统清理软件。 <br/>
-ccleaner：系统垃圾清理。<br/>
-appfresh：系统软件更新。<br/>
-day-o：替换系统时间工具。 <br/>
-memoryfree 2 :内存释放工具。<br/>
-simonfree：网络工具。</p>
-
-<h3>即时通讯</h3>
-
-<p>qq：无法逃避的腾讯客户端。<br/>
-ipmessenger：mac下的飞鸽传书。<br/>
-macbo：新浪微博客户端。</p>
-
-<h3>其他</h3>
-
-<p>google earth：研究世界。</p>
+<p>上述这些故障并不复杂，很多是由于失误造成，但由于错误呈现的方式不明，解决起来相当耗时，先记载这些，再遇上新问题会直接添加在此文末尾。</p>
 </div>
 
 
@@ -228,7 +173,7 @@ macbo：新浪微博客户端。</p>
   
 
 
-<time datetime="2012-05-12T23:45:00+08:00" pubdate data-updated="true">May 12<span>th</span>, 2012</time>
+<time datetime="2012-08-13T20:11:00+08:00" pubdate data-updated="true">Aug 13<span>th</span>, 2012</time>
       
 
 <span class="categories">
@@ -242,7 +187,7 @@ macbo：新浪微博客户端。</p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kleistx.github.com/blog/macchang-yong-di-san-fang-ruan-jian-tui-jian/" data-via="" data-counturl="http://kleistx.github.com/blog/macchang-yong-di-san-fang-ruan-jian-tui-jian/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kleistx.github.com/blog/the-notes-of-octopress/" data-via="" data-counturl="http://kleistx.github.com/blog/the-notes-of-octopress/" >Tweet</a>
   
   
   
@@ -251,10 +196,8 @@ macbo：新浪微博客户端。</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/jiu-ri-du-shu-shi-guang/" title="Previous Post: 旧日读书时光">&laquo; 旧日读书时光</a>
+        <a class="basic-alignment left" href="/blog/the-django-book-2-note-1/" title="Previous Post: The Django Book 2 ：Notes 1">&laquo; The Django Book 2 ：Notes 1</a>
       
-      
-        <a class="basic-alignment right" href="/blog/octopresszhe-teng-ji/" title="Next Post: Octopress折腾记">Octopress折腾记 &raquo;</a>
       
     </p>
   </footer>
@@ -330,8 +273,8 @@ macbo：新浪微博客户端。</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://kleistx.github.com/blog/macchang-yong-di-san-fang-ruan-jian-tui-jian/';
-        var disqus_url = 'http://kleistx.github.com/blog/macchang-yong-di-san-fang-ruan-jian-tui-jian/';
+        var disqus_identifier = 'http://kleistx.github.com/blog/the-notes-of-octopress/';
+        var disqus_url = 'http://kleistx.github.com/blog/the-notes-of-octopress/';
         var disqus_script = 'embed.js';
       
     (function () {
