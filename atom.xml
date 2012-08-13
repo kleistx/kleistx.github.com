@@ -4,7 +4,7 @@
   <title><![CDATA[Xway]]></title>
   <link href="http://kleistx.github.com/atom.xml" rel="self"/>
   <link href="http://kleistx.github.com/"/>
-  <updated>2012-08-13T21:01:49+08:00</updated>
+  <updated>2012-08-13T21:08:16+08:00</updated>
   <id>http://kleistx.github.com/</id>
   <author>
     <name><![CDATA[xway]]></name>
@@ -20,11 +20,9 @@
     <id>http://kleistx.github.com/blog/the-notes-of-octopress</id>
     <content type="html"><![CDATA[<p>使用octopress已有半年了，到目前为止感觉不坏，相比国内的博客平台，最大的好处是不用担心若干莫名其妙的敏感词导致文章不能发布，而且它确实是个时尚玩具，和ruby，github，sass都扯上了关系，满足了我这个伪程序员一点虚荣心，不过这类玩意儿就像快刀，好用是好用，一不小心就划伤手指。</p>
 
-<p>言归正传，记载几个我使用过程中遇到过的问题，解决方案说来不值一提，但是寻找此方案时那是相当的耗时，因为大部分情况下，你看到的出错提示很相似，根本不可能正确指示出问题在哪儿。</p>
+<p>言归正传，记载几个我使用过程中遇到过的问题，大部分情况下，你在rake generate时看到的出错提示很相似，如下：</p>
 
 <h3>最常见的故障显示</h3>
-
-<p>在rake generate时出错提示如下：</p>
 
 <pre><code>/Users/toutakashi/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/psych.rb:203:in `parse': (/Users/toutakashi/xway/octopress/_config.yml): could not find expected ': while scanning a simple key at line 8 column 1 (Psych::SyntaxError)
 from /Users/toutakashi/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/psych.rb:203:in `parse_stream'
@@ -49,16 +47,16 @@ from /Users/toutakashi/.rvm/gems/ruby-1.9.3-p194/bin/ruby_noexec_wrapper:14:in `
 
 <h3>categories中的类别</h3>
 
-<p>倘若上面的错误至少还指示了出错的文件和行号，那下面这个完全就是看不明白了：</p>
+<p>上面的错误至少还指示了出错的文件和行号，那下面这个完全就是看不明白了（已省略大把的from）：</p>
 
 <pre><code>/Users/toutakashi/.rvm/rubies/ruby-1.9.3-p194/lib/ruby/1.9.1/psych.rb:203:in `parse': (&lt;unknown&gt;): did not find expected key while parsing a block mapping at line 2 column 1 (Psych::SyntaxError)
 </code></pre>
 
-<p>一个<unknown>让你欲哭无泪。我碰上这个错误时，恰好是在更新octopress之后，为此重装了octopress，重装了不同版本的ruby，其间发现由于我的新系统lion不带gcc，无法编译ruby，又折腾半天发现得给xcode安个command tools，但即使全重装还是没有改善，最后偶然的发现原因是最近的一片文章中categories格式错了，本来应该是<code>categories: [python,notes]</code>，我不小心给写成了<code>categories: [python],[notes]</code>，于是悲剧了。</p>
+<p>一个<unknown>让你欲哭无泪。我碰上这个错误时，恰好是在更新octopress之后，为此重装了octopress，重装了不同版本的ruby，其间发现由于我的新系统lion不带gcc，无法编译ruby，又折腾半天发现得给xcode安个command tools，但即使这样还是没有改善，最后偶然的发现原因是最近的一片文章中categories格式错了，本来应该是<code>categories: [python,notes]</code>，我不小心给写成了<code>categories: [python],[notes]</code>，于是悲剧了。</p>
 
 <h3>sass更新的问题</h3>
 
-<p>没事儿最好别急着更新，我在某次跟风更新octopress的源码之后，界面变得乱七八糟，最后发现是sass版本太新的原因，好在这种事情不是我一个人遇到，不久作者的github的页面上就给出了解决方案。</p>
+<p>没事儿最好别急着更新，我在某次跟风更新octopress的源码之后，界面变得乱七八糟，最后发现是sass版本太新的原因，好在这种事情不是我一个人遇到，不久作者的github的页面上就给出了解决方案，但我也有半个月没写成博客。</p>
 
 <h3>记载</h3>
 
