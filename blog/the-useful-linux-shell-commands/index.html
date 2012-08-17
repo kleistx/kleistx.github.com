@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: tools - Xway</title>
+  <title>最牛的linux shell命令(摘录） - Xway</title>
   <meta name="author" content="xway">
 
   
-  <meta name="description" content="Category: tools">
+  <meta name="description" content="这里仅仅根据自己的需求摘录了一部分，想看完整版的可以去这里。 第一部分 1.以sudo运行上条命s令 $sudo!! 2.以http方式共享当前文件的文件夹,在127.0.0.1：8000可见 $python -m SimpleHTTPServer 3.以普通用户打开vim时， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://kleistx.github.comblog/categories/tools/">
+  <link rel="canonical" href="http://kleistx.github.com/blog/the-useful-linux-shell-commands/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -77,64 +77,191 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Tools</h1>
+    
+      <h1 class="entry-title">最牛的linux Shell命令(摘录）</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-17T16:05:00+08:00" pubdate data-updated="true">Aug 17<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>这里仅仅根据自己的需求摘录了一部分，想看完整版的可以去<a href="http://wowubuntu.com/tag/linuxshell" title="这里">这里</a>。</p>
 
-  
-  <h2>2012</h2>
+<h2>第一部分</h2>
 
-<article>
-  
-<h1><a href="/blog/the-notes-of-octopress/">使用octopress中的故障记录</a></h1>
-<time datetime="2012-08-13T20:11:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>13</span> <span class='year'>2012</span></time>
+<p>1.以sudo运行上条命s令</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/tools/'>tools</a></span>
-</footer>
+<pre><code>$sudo!!
+</code></pre>
 
+<p>2.以http方式共享当前文件的文件夹,在<code>127.0.0.1：8000</code>可见</p>
 
-</article>
+<pre><code>$python -m SimpleHTTPServer
+</code></pre>
 
+<p>3.以普通用户打开vim时，保存时发现需要root权限，用这条命令</p>
 
+<pre><code>:w !sudo tee%
+</code></pre>
 
-<article>
-  
-<h1><a href="/blog/octopresszhe-teng-ji/">Octopress折腾记</a></h1>
-<time datetime="2012-05-13T17:36:00+08:00" pubdate><span class='month'>May</span> <span class='day'>13</span> <span class='year'>2012</span></time>
+<p>4.替换上一个命令中的一个词,比如将上个命令中的first换成second</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/tools/'>tools</a></span>
-</footer>
+<pre><code>$^first^second^
+</code></pre>
 
+<p>5.快速备份一个文件</p>
 
-</article>
+<pre><code>$cp filename{,.bak}
+</code></pre>
 
+<h2>第二部分</h2>
 
+<p>1.新建文件</p>
 
-<article>
-  
-<h1><a href="/blog/macchang-yong-di-san-fang-ruan-jian-tui-jian/">Mac常用第三方软件推荐</a></h1>
-<time datetime="2012-05-12T23:45:00+08:00" pubdate><span class='month'>May</span> <span class='day'>12</span> <span class='year'>2012</span></time>
+<pre><code>&gt;file.txt
+</code></pre>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/tools/'>tools</a></span>
-</footer>
+<p>2.定时执行一次性任务，用at，多次性任务，用cron，午夜echo</p>
 
+<pre><code>echo cmd|at midnight
+</code></pre>
 
-</article>
+<p>可使用tomorrow、next week，比较人性化。</p>
 
+<p>3.查看系统中占用端口的进程</p>
+
+<pre><code>netstat -tulnp
+</code></pre>
+
+<p>4.用python快速开启一个smtp服务</p>
+
+<pre><code>python -m smtpd -n -c DebuggingServer localhost:1025
+</code></pre>
+
+<h2>第三部分</h2>
+
+<p>1.实时查看目录下最新改动过的文件</p>
+
+<pre><code>watch -d -n 1 'df; ls -FlAt /path'
+</code></pre>
+
+<p>2.用wget的递归方式下载整个网站</p>
+
+<pre><code>wget --random-wait -r -p -e robots=off -U Mozilla www.example.com
+</code></pre>
+
+<p>3.显示消耗内存最多的10个运行中的进程，按内存使用量排序</p>
+
+<pre><code>ps aux | sort -nk +4 | tail
+</code></pre>
+
+<h2>第四部分</h2>
+
+<p>1.简易计算器</p>
+
+<pre><code>time read
+</code></pre>
+
+<p>运行命令开始计算时间，结束时按一下Enter，显示计时精确到ms</p>
+
+<p>2.列出最常用的10条命令</p>
+
+<pre><code>history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head
+</code></pre>
+
+<p>3.检查gmail新邮件</p>
+
+<pre><code>curl -u you@gmail.com --silent "https://mail.google.com/mail/feed/atom"|perl -ne \
+'
+print "Subject: $1 " if /&lt;title&gt;(.+?)&lt;\/title&gt;/ &amp;&amp; $title++;
+print "(from $1)\n" if /&lt;email&gt;(.+?)&lt;\/email&gt;/;
+'
+</code></pre>
+
+<p>4.用telnet看星球大战</p>
+
+<pre><code>telnet towel.blinkenlights.nl
+</code></pre>
+
+<p>字符艺术，so cool！</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">xway</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-17T16:05:00+08:00" pubdate data-updated="true">Aug 17<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/notes/'>notes</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kleistx.github.com/blog/the-useful-linux-shell-commands/" data-via="" data-counturl="http://kleistx.github.com/blog/the-useful-linux-shell-commands/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/the-notes-of-octopress/" title="Previous Post: 使用octopress中的故障记录">&laquo; 使用octopress中的故障记录</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -199,7 +326,10 @@
       var disqus_shortname = 'xway';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://kleistx.github.com/blog/the-useful-linux-shell-commands/';
+        var disqus_url = 'http://kleistx.github.com/blog/the-useful-linux-shell-commands/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

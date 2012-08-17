@@ -4,7 +4,7 @@
   <title><![CDATA[Xway]]></title>
   <link href="http://kleistx.github.com/atom.xml" rel="self"/>
   <link href="http://kleistx.github.com/"/>
-  <updated>2012-08-13T21:11:26+08:00</updated>
+  <updated>2012-08-17T16:09:11+08:00</updated>
   <id>http://kleistx.github.com/</id>
   <author>
     <name><![CDATA[xway]]></name>
@@ -12,6 +12,113 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[最牛的linux shell命令(摘录）]]></title>
+    <link href="http://kleistx.github.com/blog/the-useful-linux-shell-commands/"/>
+    <updated>2012-08-17T16:05:00+08:00</updated>
+    <id>http://kleistx.github.com/blog/the-useful-linux-shell-commands</id>
+    <content type="html"><![CDATA[<p>这里仅仅根据自己的需求摘录了一部分，想看完整版的可以去<a href="http://wowubuntu.com/tag/linuxshell" title="这里">这里</a>。</p>
+
+<h2>第一部分</h2>
+
+<p>1.以sudo运行上条命s令</p>
+
+<pre><code>$sudo!!
+</code></pre>
+
+<p>2.以http方式共享当前文件的文件夹,在<code>127.0.0.1：8000</code>可见</p>
+
+<pre><code>$python -m SimpleHTTPServer
+</code></pre>
+
+<p>3.以普通用户打开vim时，保存时发现需要root权限，用这条命令</p>
+
+<pre><code>:w !sudo tee%
+</code></pre>
+
+<p>4.替换上一个命令中的一个词,比如将上个命令中的first换成second</p>
+
+<pre><code>$^first^second^
+</code></pre>
+
+<p>5.快速备份一个文件</p>
+
+<pre><code>$cp filename{,.bak}
+</code></pre>
+
+<h2>第二部分</h2>
+
+<p>1.新建文件</p>
+
+<pre><code>&gt;file.txt
+</code></pre>
+
+<p>2.定时执行一次性任务，用at，多次性任务，用cron，午夜echo</p>
+
+<pre><code>echo cmd|at midnight
+</code></pre>
+
+<p>可使用tomorrow、next week，比较人性化。</p>
+
+<p>3.查看系统中占用端口的进程</p>
+
+<pre><code>netstat -tulnp
+</code></pre>
+
+<p>4.用python快速开启一个smtp服务</p>
+
+<pre><code>python -m smtpd -n -c DebuggingServer localhost:1025
+</code></pre>
+
+<h2>第三部分</h2>
+
+<p>1.实时查看目录下最新改动过的文件</p>
+
+<pre><code>watch -d -n 1 'df; ls -FlAt /path'
+</code></pre>
+
+<p>2.用wget的递归方式下载整个网站</p>
+
+<pre><code>wget --random-wait -r -p -e robots=off -U Mozilla www.example.com
+</code></pre>
+
+<p>3.显示消耗内存最多的10个运行中的进程，按内存使用量排序</p>
+
+<pre><code>ps aux | sort -nk +4 | tail
+</code></pre>
+
+<h2>第四部分</h2>
+
+<p>1.简易计算器</p>
+
+<pre><code>time read
+</code></pre>
+
+<p>运行命令开始计算时间，结束时按一下Enter，显示计时精确到ms</p>
+
+<p>2.列出最常用的10条命令</p>
+
+<pre><code>history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head
+</code></pre>
+
+<p>3.检查gmail新邮件</p>
+
+<pre><code>curl -u you@gmail.com --silent "https://mail.google.com/mail/feed/atom"|perl -ne \
+'
+print "Subject: $1 " if /&lt;title&gt;(.+?)&lt;\/title&gt;/ &amp;&amp; $title++;
+print "(from $1)\n" if /&lt;email&gt;(.+?)&lt;\/email&gt;/;
+'
+</code></pre>
+
+<p>4.用telnet看星球大战</p>
+
+<pre><code>telnet towel.blinkenlights.nl
+</code></pre>
+
+<p>字符艺术，so cool！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[使用octopress中的故障记录]]></title>
